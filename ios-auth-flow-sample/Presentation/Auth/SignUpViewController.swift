@@ -143,6 +143,8 @@ class SignUpViewController: UIViewController {
         print(String(describing: Self.self), #function)
         // setup input event hooks
         signUpButton.addTarget(self, action: #selector(onTouchedSignUpButton(_:)), for: .touchUpInside)
+        
+        // TODO: use Publisher
         emailTextField.delegate = self
         passwordTextField.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(textFieldTextDidChangeNotification(_:)), name: UITextField.textDidChangeNotification, object: emailTextField)
@@ -195,6 +197,21 @@ class SignUpViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [unowned self] errorMessage in
                 passwordValidationResultLabel.text = errorMessage
+            }
+            .store(in: &cancellables)
+        
+        // TODO: 検証する
+        signUpButton.publisher(for: .touchUpInside)
+        
+        emailTextField.publisher(for: \.text).sink { text in
+            print(#function, text ?? "")
+        }
+        .store(in: &cancellables)
+        
+        NotificationCenter.default
+            .publisher(for: UITextField.textDidChangeNotification,object: emailTextField)
+            .sink { notification in
+                print(#function, (notification.object as! UITextField).text ?? "")
             }
             .store(in: &cancellables)
     }

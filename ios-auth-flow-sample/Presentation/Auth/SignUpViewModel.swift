@@ -34,15 +34,17 @@ class SignUpViewModel {
         case error(SignUpViewError)
     }
     
+    // TODO: input 
     // INPUT
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var emailEndEditing: Bool = false
 
+    // TODO: struct Output
     // OUTPUT
     @Published var processState: ProcessState?
     @Published var isEnabledSignUp: Bool = false
-    @Published var emailValidationError: String?
+    @Published var emailValidationError: String? // TODO: replace to enum
     @Published var passwordValidationError: String?
     
     private var cancellables: Set<AnyCancellable> = []
