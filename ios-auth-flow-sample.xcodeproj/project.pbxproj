@@ -10,10 +10,18 @@
 		1B23936D7E045DC15673F9BB /* Pods_ios_auth_flow_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7668C0B8189788E793F16F2 /* Pods_ios_auth_flow_sample.framework */; };
 		5461109F2AAAF4DF0049588A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461109E2AAAF4DF0049588A /* AppDelegate.swift */; };
 		546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110A02AAAF4DF0049588A /* SceneDelegate.swift */; };
-		546110A32AAAF4DF0049588A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110A22AAAF4DF0049588A /* ViewController.swift */; };
-		546110A62AAAF4DF0049588A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 546110A42AAAF4DF0049588A /* Main.storyboard */; };
+		546110A32AAAF4DF0049588A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110A22AAAF4DF0049588A /* RootViewController.swift */; };
 		546110A82AAAF4E10049588A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 546110A72AAAF4E10049588A /* Assets.xcassets */; };
 		546110AB2AAAF4E10049588A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 546110A92AAAF4E10049588A /* LaunchScreen.storyboard */; };
+		546110B42AAB04800049588A /* RootViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110B32AAB04800049588A /* RootViewModel.swift */; };
+		546110B82AAB0E840049588A /* AuthRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110B72AAB0E840049588A /* AuthRepositoryImpl.swift */; };
+		546110BB2AAB0FF20049588A /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110BA2AAB0FF20049588A /* DefaultsKeys.swift */; };
+		546110BE2AAB14E80049588A /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110BD2AAB14E80049588A /* ApiClient.swift */; };
+		546110C02AAB18610049588A /* AuthValidRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110BF2AAB18610049588A /* AuthValidRequest.swift */; };
+		546110C32AAB2EE90049588A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110C22AAB2EE90049588A /* SignUpViewController.swift */; };
+		546110C52AAB2EFC0049588A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110C42AAB2EFC0049588A /* SignUpViewModel.swift */; };
+		5490E4AB2AE43799007FFC6E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5490E4AA2AE43799007FFC6E /* UIView+Ext.swift */; };
+		5490E4AD2AE45F9B007FFC6E /* Tappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5490E4AC2AE45F9B007FFC6E /* Tappable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,11 +30,19 @@
 		5461109B2AAAF4DF0049588A /* ios-auth-flow-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-auth-flow-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5461109E2AAAF4DF0049588A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		546110A02AAAF4DF0049588A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		546110A22AAAF4DF0049588A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		546110A52AAAF4DF0049588A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		546110A22AAAF4DF0049588A /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		546110A72AAAF4E10049588A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		546110AA2AAAF4E10049588A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		546110AC2AAAF4E10049588A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		546110B32AAB04800049588A /* RootViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewModel.swift; sourceTree = "<group>"; };
+		546110B72AAB0E840049588A /* AuthRepositoryImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryImpl.swift; sourceTree = "<group>"; };
+		546110BA2AAB0FF20049588A /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
+		546110BD2AAB14E80049588A /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		546110BF2AAB18610049588A /* AuthValidRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidRequest.swift; sourceTree = "<group>"; };
+		546110C22AAB2EE90049588A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		546110C42AAB2EFC0049588A /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		5490E4AA2AE43799007FFC6E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		5490E4AC2AE45F9B007FFC6E /* Tappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tappable.swift; sourceTree = "<group>"; };
 		C7668C0B8189788E793F16F2 /* Pods_ios_auth_flow_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_auth_flow_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -71,15 +87,79 @@
 		5461109D2AAAF4DF0049588A /* ios-auth-flow-sample */ = {
 			isa = PBXGroup;
 			children = (
-				5461109E2AAAF4DF0049588A /* AppDelegate.swift */,
-				546110A02AAAF4DF0049588A /* SceneDelegate.swift */,
-				546110A22AAAF4DF0049588A /* ViewController.swift */,
-				546110A42AAAF4DF0049588A /* Main.storyboard */,
+				546110B22AAB00020049588A /* Presentation */,
+				546110B52AAB0E3F0049588A /* Data */,
 				546110A72AAAF4E10049588A /* Assets.xcassets */,
-				546110A92AAAF4E10049588A /* LaunchScreen.storyboard */,
 				546110AC2AAAF4E10049588A /* Info.plist */,
 			);
 			path = "ios-auth-flow-sample";
+			sourceTree = "<group>";
+		};
+		546110B22AAB00020049588A /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				5490E4A92AE4372F007FFC6E /* Library */,
+				546110C12AAB2EC40049588A /* Auth */,
+				5461109E2AAAF4DF0049588A /* AppDelegate.swift */,
+				546110A02AAAF4DF0049588A /* SceneDelegate.swift */,
+				546110A22AAAF4DF0049588A /* RootViewController.swift */,
+				546110B32AAB04800049588A /* RootViewModel.swift */,
+				546110A92AAAF4E10049588A /* LaunchScreen.storyboard */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		546110B52AAB0E3F0049588A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				546110BC2AAB14D90049588A /* ApiClient */,
+				546110B92AAB0FDE0049588A /* UserDefaults */,
+				546110B62AAB0E550049588A /* RepositoryImpl */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		546110B62AAB0E550049588A /* RepositoryImpl */ = {
+			isa = PBXGroup;
+			children = (
+				546110B72AAB0E840049588A /* AuthRepositoryImpl.swift */,
+			);
+			path = RepositoryImpl;
+			sourceTree = "<group>";
+		};
+		546110B92AAB0FDE0049588A /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				546110BA2AAB0FF20049588A /* DefaultsKeys.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
+		546110BC2AAB14D90049588A /* ApiClient */ = {
+			isa = PBXGroup;
+			children = (
+				546110BD2AAB14E80049588A /* ApiClient.swift */,
+				546110BF2AAB18610049588A /* AuthValidRequest.swift */,
+			);
+			path = ApiClient;
+			sourceTree = "<group>";
+		};
+		546110C12AAB2EC40049588A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				546110C22AAB2EE90049588A /* SignUpViewController.swift */,
+				546110C42AAB2EFC0049588A /* SignUpViewModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		5490E4A92AE4372F007FFC6E /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5490E4AA2AE43799007FFC6E /* UIView+Ext.swift */,
+				5490E4AC2AE45F9B007FFC6E /* Tappable.swift */,
+			);
+			path = Library;
 			sourceTree = "<group>";
 		};
 		56FD8AD029F46E41AF40B44B /* Pods */ = {
@@ -88,7 +168,6 @@
 				1F8B14ADBA94080D3A655E53 /* Pods-ios-auth-flow-sample.debug.xcconfig */,
 				076F028DE542072BF28190B0 /* Pods-ios-auth-flow-sample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -103,6 +182,7 @@
 				546110972AAAF4DF0049588A /* Sources */,
 				546110982AAAF4DF0049588A /* Frameworks */,
 				546110992AAAF4DF0049588A /* Resources */,
+				8F4FBC9E28B612984536626D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -153,7 +233,6 @@
 			files = (
 				546110AB2AAAF4E10049588A /* LaunchScreen.storyboard in Resources */,
 				546110A82AAAF4E10049588A /* Assets.xcassets in Resources */,
-				546110A62AAAF4DF0049588A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +261,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8F4FBC9E28B612984536626D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-auth-flow-sample/Pods-ios-auth-flow-sample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios-auth-flow-sample/Pods-ios-auth-flow-sample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios-auth-flow-sample/Pods-ios-auth-flow-sample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -189,8 +285,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				546110A32AAAF4DF0049588A /* ViewController.swift in Sources */,
+				546110BE2AAB14E80049588A /* ApiClient.swift in Sources */,
+				5490E4AB2AE43799007FFC6E /* UIView+Ext.swift in Sources */,
+				5490E4AD2AE45F9B007FFC6E /* Tappable.swift in Sources */,
+				546110A32AAAF4DF0049588A /* RootViewController.swift in Sources */,
+				546110C52AAB2EFC0049588A /* SignUpViewModel.swift in Sources */,
+				546110BB2AAB0FF20049588A /* DefaultsKeys.swift in Sources */,
+				546110C02AAB18610049588A /* AuthValidRequest.swift in Sources */,
 				5461109F2AAAF4DF0049588A /* AppDelegate.swift in Sources */,
+				546110B42AAB04800049588A /* RootViewModel.swift in Sources */,
+				546110C32AAB2EE90049588A /* SignUpViewController.swift in Sources */,
+				546110B82AAB0E840049588A /* AuthRepositoryImpl.swift in Sources */,
 				546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,14 +303,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		546110A42AAAF4DF0049588A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				546110A52AAAF4DF0049588A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		546110A92AAAF4E10049588A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -343,8 +440,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-auth-flow-sample/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -354,9 +451,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mothule.ios-auth-flow-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -372,8 +472,8 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-auth-flow-sample/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -383,9 +483,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mothule.ios-auth-flow-sample";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

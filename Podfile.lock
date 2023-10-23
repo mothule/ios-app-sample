@@ -1,3 +1,16 @@
-PODFILE CHECKSUM: 54c501fd9c7eec6f56d3029fb628fc4167fe1312
+PODS:
+  - Defaults (4.2.2)
+
+DEPENDENCIES:
+  - Defaults
+
+SPEC REPOS:
+  trunk:
+    - Defaults
+
+SPEC CHECKSUMS:
+  Defaults: d785e56c0fb8890dc40351603f05c8e1df1bdd45
+
+PODFILE CHECKSUM: 2d04edfc2c711070e0df617d7248175bfe21afaa
 
 COCOAPODS: 1.12.1

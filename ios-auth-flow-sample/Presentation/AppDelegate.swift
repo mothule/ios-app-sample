@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  ios-auth-flow-sample
 //
-//  Created by Motoki Kawakami on 2023/09/08.
+//  Created by mothule on 2023/09/08.
 //
 
 import UIKit

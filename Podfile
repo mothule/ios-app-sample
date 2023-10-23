@@ -6,5 +6,6 @@ target 'ios-auth-flow-sample' do
   use_frameworks!
 
   # Pods for ios-auth-flow-sample
+  pod 'Defaults'
 
 end
