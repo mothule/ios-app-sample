@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import CombineCocoa
 
 class SignUpViewController: UIViewController {
     private let viewModel: SignUpViewModel = .init()
@@ -141,15 +142,6 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(String(describing: Self.self), #function)
-        // setup input event hooks
-        signUpButton.addTarget(self, action: #selector(onTouchedSignUpButton(_:)), for: .touchUpInside)
-        
-        // TODO: use Publisher
-        emailTextField.delegate = self
-        passwordTextField.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldTextDidChangeNotification(_:)), name: UITextField.textDidChangeNotification, object: emailTextField)
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldTextDidChangeNotification(_:)), name: UITextField.textDidChangeNotification, object: passwordTextField)
-        
         setBindings()
     }
     
@@ -200,25 +192,27 @@ class SignUpViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        // TODO: UIKitにCombine拡張を検証する
-        signUpButton.publisher(for: .touchUpInside)
         
-        emailTextField.publisher(for: \.text).sink { text in
-            print(#function, text ?? "")
+        // Bindings View → ViewModel
+        signUpButton.tapPublisher.sink { [unowned self] _ in
+            viewModel.authenticate()
         }
         .store(in: &cancellables)
         
         NotificationCenter.default
-            .publisher(for: UITextField.textDidChangeNotification,object: emailTextField)
-            .sink { notification in
-                print(#function, (notification.object as! UITextField).text ?? "")
-            }
-            .store(in: &cancellables)
-    }
-    
-    @objc
-    private func onTouchedSignUpButton(_ sender: UIButton) {
-        viewModel.authenticate()
+            .publisher(for: UITextField.textDidChangeNotification, object: emailTextField)
+            .compactMap({ $0.object as? UITextField })
+            .map({ $0.text })
+            .replaceNil(with: "")
+            .assign(to: &viewModel.$email)
+        
+        NotificationCenter.default
+            .publisher(for: UITextField.textDidChangeNotification, object: passwordTextField)
+            .compactMap({ $0.object as? UITextField })
+            .map({ $0.text })
+            .replaceNil(with: "")
+            .assign(to: &viewModel.$password)
+        
     }
     
     private func dismissAndNavigateOnboardWalkThrough() {
@@ -228,27 +222,6 @@ class SignUpViewController: UIViewController {
         didMove(toParent: parent)
         
         // TODO: show walk through
-    }
-}
-
-extension SignUpViewController: UITextFieldDelegate {
-    // became first responder
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        print(#function, textField.text ?? "")
-    }
-    // may be called if forced even if shouldEndEditing returns NO (e.g. view removed from window) or endEditing:YES called
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        print(#function, textField.text ?? "")
-    }
-    
-    @objc
-    private func textFieldTextDidChangeNotification(_ sender: Notification) {
-        guard let textField = sender.object as? UITextField else { return }
-        if textField == emailTextField {
-            viewModel.email = textField.text ?? ""
-        } else if textField == passwordTextField {
-            viewModel.password = textField.text ?? ""
-        }
     }
 }
 
