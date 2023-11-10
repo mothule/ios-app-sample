@@ -115,12 +115,22 @@ class SignUpViewController: UIViewController {
                 views: ["emailValidationResultLabel": emailValidationResultLabel]
             )
             + NSLayoutConstraint.constraints(
+                withVisualFormat: "V:[emailValidationResultLabel(12)]",
+                metrics: nil,
+                views: ["emailValidationResultLabel": emailValidationResultLabel]
+            )
+            + NSLayoutConstraint.constraints(
                 withVisualFormat: "|[textField]|",
                 metrics: nil,
                 views: ["textField": passwordTextField]
             )
             + NSLayoutConstraint.constraints(
                 withVisualFormat: "|[passwordValidationResultLabel]|",
+                metrics: nil,
+                views: ["passwordValidationResultLabel": passwordValidationResultLabel]
+            )
+            + NSLayoutConstraint.constraints(
+                withVisualFormat: "V:[passwordValidationResultLabel(12)]",
                 metrics: nil,
                 views: ["passwordValidationResultLabel": passwordValidationResultLabel]
             )
