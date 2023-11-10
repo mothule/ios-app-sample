@@ -7,5 +7,6 @@ target 'ios-auth-flow-sample' do
 
   # Pods for ios-auth-flow-sample
   pod 'Defaults'
+  pod 'CombineCocoa'
 
 end

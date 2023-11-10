@@ -1,16 +1,20 @@
 PODS:
+  - CombineCocoa (0.4.1)
   - Defaults (4.2.2)
 
 DEPENDENCIES:
+  - CombineCocoa
   - Defaults
 
 SPEC REPOS:
   trunk:
+    - CombineCocoa
     - Defaults
 
 SPEC CHECKSUMS:
+  CombineCocoa: e5210dbfb480ff251078929459ac17e750e7af1d
   Defaults: d785e56c0fb8890dc40351603f05c8e1df1bdd45
 
-PODFILE CHECKSUM: 2d04edfc2c711070e0df617d7248175bfe21afaa
+PODFILE CHECKSUM: b79203a4e384e0a16898d8d4b38d8f385f6848ee
 
 COCOAPODS: 1.12.1
