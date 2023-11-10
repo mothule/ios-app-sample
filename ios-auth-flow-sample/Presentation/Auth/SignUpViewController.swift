@@ -200,7 +200,7 @@ class SignUpViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        // TODO: 検証する
+        // TODO: UIKitにCombine拡張を検証する
         signUpButton.publisher(for: .touchUpInside)
         
         emailTextField.publisher(for: \.text).sink { text in
