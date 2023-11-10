@@ -174,7 +174,9 @@ class SignUpViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [unowned self] isEnabled in
                 signUpButton.isEnabled = isEnabled
-                signUpButton.backgroundColor = isEnabled ? .magenta : .gray
+                UIView.animate(withDuration: 0.3) {
+                    self.signUpButton.backgroundColor = isEnabled ? .magenta : .gray
+                }
             }
             .store(in: &cancellables)
         
