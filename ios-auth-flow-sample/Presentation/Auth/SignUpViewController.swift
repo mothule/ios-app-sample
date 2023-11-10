@@ -115,12 +115,22 @@ class SignUpViewController: UIViewController {
                 views: ["emailValidationResultLabel": emailValidationResultLabel]
             )
             + NSLayoutConstraint.constraints(
+                withVisualFormat: "V:[emailValidationResultLabel(12)]",
+                metrics: nil,
+                views: ["emailValidationResultLabel": emailValidationResultLabel]
+            )
+            + NSLayoutConstraint.constraints(
                 withVisualFormat: "|[textField]|",
                 metrics: nil,
                 views: ["textField": passwordTextField]
             )
             + NSLayoutConstraint.constraints(
                 withVisualFormat: "|[passwordValidationResultLabel]|",
+                metrics: nil,
+                views: ["passwordValidationResultLabel": passwordValidationResultLabel]
+            )
+            + NSLayoutConstraint.constraints(
+                withVisualFormat: "V:[passwordValidationResultLabel(12)]",
                 metrics: nil,
                 views: ["passwordValidationResultLabel": passwordValidationResultLabel]
             )
@@ -174,22 +184,20 @@ class SignUpViewController: UIViewController {
             .receive(on: RunLoop.main)
             .sink { [unowned self] isEnabled in
                 signUpButton.isEnabled = isEnabled
-                signUpButton.backgroundColor = isEnabled ? .magenta : .gray
+                UIView.animate(withDuration: 0.3) {
+                    self.signUpButton.backgroundColor = isEnabled ? .magenta : .gray
+                }
             }
             .store(in: &cancellables)
         
         viewModel.$emailValidationError
             .receive(on: RunLoop.main)
-            .sink { [unowned self] errorMessage in
-                emailValidationResultLabel.text = errorMessage
-            }
+            .assign(to: \.text, on: emailValidationResultLabel)
             .store(in: &cancellables)
         
         viewModel.$passwordValidationError
             .receive(on: RunLoop.main)
-            .sink { [unowned self] errorMessage in
-                passwordValidationResultLabel.text = errorMessage
-            }
+            .assign(to: \.text, on: passwordValidationResultLabel)
             .store(in: &cancellables)
         
         
