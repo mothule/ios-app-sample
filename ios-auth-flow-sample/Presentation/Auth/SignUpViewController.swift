@@ -182,16 +182,12 @@ class SignUpViewController: UIViewController {
         
         viewModel.$emailValidationError
             .receive(on: RunLoop.main)
-            .sink { [unowned self] errorMessage in
-                emailValidationResultLabel.text = errorMessage
-            }
+            .assign(to: \.text, on: emailValidationResultLabel)
             .store(in: &cancellables)
         
         viewModel.$passwordValidationError
             .receive(on: RunLoop.main)
-            .sink { [unowned self] errorMessage in
-                passwordValidationResultLabel.text = errorMessage
-            }
+            .assign(to: \.text, on: passwordValidationResultLabel)
             .store(in: &cancellables)
         
         
