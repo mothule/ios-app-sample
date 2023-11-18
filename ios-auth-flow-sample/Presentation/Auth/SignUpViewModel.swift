@@ -14,6 +14,7 @@ enum SignUpViewError: Error {
     case unknown
 }
 
+
 // TODO: 汎用フォームバリデーション用エラーに差し替える
 enum EmailAuthenticationValidationResult: Error {
     case successful
@@ -38,7 +39,6 @@ class SignUpViewModel {
     // INPUT
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var emailEndEditing: Bool = false
 
     // TODO: struct Output
     // OUTPUT
@@ -85,9 +85,9 @@ class SignUpViewModel {
                 if password.isEmpty {
                     return "Required password"
                 } else if password.count < 8 {
-                    return "Password length should higher 8 length"
+                    return "Password length should higher 7 length"
                 } else if password.count > 64 {
-                    return "Password length should lower 63 length"
+                    return "Password length should lower 65 length"
                 } else {
                     return ""
                 }

@@ -11,6 +11,13 @@ target 'ios-auth-flow-sample' do
 
 end
 
+target 'UnitTests' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  
+  pod 'Quick'
+  pod 'Nimble'
+end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
