@@ -85,9 +85,9 @@ class SignUpViewModel {
                 if password.isEmpty {
                     return "Required password"
                 } else if password.count < 8 {
-                    return "Password length should higher 8 length"
+                    return "Password length should higher 7 length"
                 } else if password.count > 64 {
-                    return "Password length should lower 63 length"
+                    return "Password length should lower 65 length"
                 } else {
                     return ""
                 }
