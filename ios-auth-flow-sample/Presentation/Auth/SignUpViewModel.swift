@@ -14,6 +14,7 @@ enum SignUpViewError: Error {
     case unknown
 }
 
+
 // TODO: 汎用フォームバリデーション用エラーに差し替える
 enum EmailAuthenticationValidationResult: Error {
     case successful
@@ -38,7 +39,6 @@ class SignUpViewModel {
     // INPUT
     @Published var email: String = ""
     @Published var password: String = ""
-    @Published var emailEndEditing: Bool = false
 
     // TODO: struct Output
     // OUTPUT
