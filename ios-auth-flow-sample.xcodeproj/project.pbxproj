@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		07BC6C2FA470D95A606B27D1 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30208152F4FE732FE3E117E3 /* Pods_UnitTests.framework */; };
 		1B23936D7E045DC15673F9BB /* Pods_ios_auth_flow_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7668C0B8189788E793F16F2 /* Pods_ios_auth_flow_sample.framework */; };
+		543522EC2B08D9FA00A531F9 /* GeneratedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */; };
 		5461109F2AAAF4DF0049588A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461109E2AAAF4DF0049588A /* AppDelegate.swift */; };
 		546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110A02AAAF4DF0049588A /* SceneDelegate.swift */; };
 		546110A32AAAF4DF0049588A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110A22AAAF4DF0049588A /* RootViewController.swift */; };
@@ -23,6 +24,7 @@
 		546110C52AAB2EFC0049588A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110C42AAB2EFC0049588A /* SignUpViewModel.swift */; };
 		5490E4AB2AE43799007FFC6E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5490E4AA2AE43799007FFC6E /* UIView+Ext.swift */; };
 		5490E4AD2AE45F9B007FFC6E /* Tappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5490E4AC2AE45F9B007FFC6E /* Tappable.swift */; };
+		54B1DA602AFED1A800A5A2C3 /* SignUpViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1DA5F2AFED1A800A5A2C3 /* SignUpViewModelSpec.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,7 @@
 		1A2F6C17C9D81C32BB106D61 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F8B14ADBA94080D3A655E53 /* Pods-ios-auth-flow-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-auth-flow-sample.debug.xcconfig"; path = "Target Support Files/Pods-ios-auth-flow-sample/Pods-ios-auth-flow-sample.debug.xcconfig"; sourceTree = "<group>"; };
 		30208152F4FE732FE3E117E3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMock.swift; sourceTree = "<group>"; };
 		5461109B2AAAF4DF0049588A /* ios-auth-flow-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-auth-flow-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5461109E2AAAF4DF0049588A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		546110A02AAAF4DF0049588A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +60,7 @@
 		5490E4AA2AE43799007FFC6E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		5490E4AC2AE45F9B007FFC6E /* Tappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tappable.swift; sourceTree = "<group>"; };
 		54B1DA532AFED08F00A5A2C3 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54B1DA5F2AFED1A800A5A2C3 /* SignUpViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModelSpec.swift; sourceTree = "<group>"; };
 		C7668C0B8189788E793F16F2 /* Pods_ios_auth_flow_sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_auth_flow_sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEFAF5D849CC93C44EAF6F20 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +92,14 @@
 				30208152F4FE732FE3E117E3 /* Pods_UnitTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		543522E62B08CA4E00A531F9 /* TestHelper */ = {
+			isa = PBXGroup;
+			children = (
+				543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */,
+			);
+			path = TestHelper;
 			sourceTree = "<group>";
 		};
 		546110922AAAF4DF0049588A = {
@@ -216,6 +228,7 @@
 		54B1DA5E2AFED14200A5A2C3 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				54B1DA5F2AFED1A800A5A2C3 /* SignUpViewModelSpec.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -243,6 +256,7 @@
 				546110982AAAF4DF0049588A /* Frameworks */,
 				546110992AAAF4DF0049588A /* Resources */,
 				8F4FBC9E28B612984536626D /* [CP] Embed Pods Frameworks */,
+				543522ED2B08DA4100A531F9 /* Run mockolo */,
 			);
 			buildRules = (
 			);
@@ -370,6 +384,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		543522ED2B08DA4100A531F9 /* Run mockolo */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run mockolo";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(SRCROOT)/UnitTests/TestHelper/GeneratedMock.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "MOCK_DESTINATION=$SRCROOT/UnitTests/TestHelper/GeneratedMock.swift\nmint run uber/mockolo mockolo \\\n    --sourcedirs \"$SRCROOT/ios-auth-flow-sample\" \\\n    --destination \"$MOCK_DESTINATION\" \\\n    --testable-imports \"ios_auth_flow_sample\" \\\n    --exclude-suffixes Images \\\n    --exclude-suffixes Strings \\\n    --mock-final \\\n    --macro \"DEBUG\"\n";
+		};
 		8F4FBC9E28B612984536626D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -428,6 +461,15 @@
 				546110C32AAB2EE90049588A /* SignUpViewController.swift in Sources */,
 				546110B82AAB0E840049588A /* AuthRepositoryImpl.swift in Sources */,
 				546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		54B1DA4F2AFED08F00A5A2C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				54B1DA602AFED1A800A5A2C3 /* SignUpViewModelSpec.swift in Sources */,
+				543522EC2B08D9FA00A531F9 /* GeneratedMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

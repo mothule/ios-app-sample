@@ -13,6 +13,7 @@ enum RepositoryError: Error {
     case invalidApiAccessToken
 }
 
+/// @mockable
 protocol AuthRepository {
     func validToken() async throws
     func authenticate() async throws
