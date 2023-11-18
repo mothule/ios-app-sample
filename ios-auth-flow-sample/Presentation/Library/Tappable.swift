@@ -2,7 +2,7 @@
 //  Tappable.swift
 //  ios-auth-flow-sample
 //
-//  Created by Motoki Kawakami on 2023/10/22.
+//  Created by mothule on 2023/10/22.
 //
 
 import Foundation
