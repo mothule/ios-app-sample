@@ -157,26 +157,33 @@ class SignUpViewController: UIViewController {
     
     
     private func setBindings() {
-        viewModel.$processState
-            .compactMap {$0}
-            .receive(on: RunLoop.main)
-            .sink { [unowned self] state in
-                switch state {
-                case .authenticating:
-                    break
-                    
+        viewModel.$dialogError
+            .compactMap { $0 }
+            .sink { [unowned self] error in
+                let alert = UIAlertController(
+                    title: "ERROR",
+                    message: error.localizedDescription,
+                    preferredStyle: .alert
+                )
+                alert.addAction(.init(title: "OK", style: .default))
+                present(alert, animated: true)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$route
+            .compactMap { $0 }
+            .sink { [unowned self] route in
+                switch route {
                 case .navigateOnboardingWalkThrough:
                     dismissAndNavigateOnboardWalkThrough()
-                    
-                case .error(let signUpViewError):
-                    let alert = UIAlertController(
-                        title: "ERROR",
-                        message: signUpViewError.localizedDescription,
-                        preferredStyle: .alert
-                    )
-                    alert.addAction(.init(title: "OK", style: .default))
-                    present(alert, animated: true)
                 }
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$isShownProgress
+            .receive(on: RunLoop.main)
+            .sink { isShownProgress in
+                // TODO: Show progress view
             }
             .store(in: &cancellables)
         
@@ -191,12 +198,10 @@ class SignUpViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.$emailValidationError
-            .receive(on: RunLoop.main)
             .assign(to: \.text, on: emailValidationResultLabel)
             .store(in: &cancellables)
         
         viewModel.$passwordValidationError
-            .receive(on: RunLoop.main)
             .assign(to: \.text, on: passwordValidationResultLabel)
             .store(in: &cancellables)
         
