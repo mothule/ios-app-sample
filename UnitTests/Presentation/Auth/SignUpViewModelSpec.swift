@@ -9,12 +9,12 @@ import Quick
 import Nimble
 @testable import ios_auth_flow_sample
 
-extension SignUpViewModel.ProcessState: Equatable {
-    public static func == (lhs: SignUpViewModel.ProcessState, rhs: SignUpViewModel.ProcessState) -> Bool {
+extension SignUpViewModel.SignUpState: Equatable {
+    public static func == (lhs: SignUpViewModel.SignUpState, rhs: SignUpViewModel.SignUpState) -> Bool {
         switch (lhs, rhs) {
         case (.authenticating, .authenticating):
             return true
-        case (.navigateOnboardingWalkThrough, .navigateOnboardingWalkThrough):
+        case (.successful, .successful):
             return true
         case (.error(let lhError), .error(let rhError)):
             return lhError == rhError
@@ -136,9 +136,10 @@ final class SignUpViewModelSpec: QuickSpec {
                     target.password = "valid password"
                 }
                 context("認証プロセスが成功したとき") {
-                    it("処理状態はウォークスルー遷移である") {
+                    it("View状態はウォークスルー遷移である") {
                         target.authenticate()
-                        expects(target.processState).toEventually(equal(.navigateOnboardingWalkThrough))
+                        expects(target.route).toEventually(equal(.navigateOnboardingWalkThrough))
+                        expects(target.isShownProgress).to(beFalse())
                     }
                 }
                 
@@ -148,10 +149,12 @@ final class SignUpViewModelSpec: QuickSpec {
                             throw RepositoryError.emptyApiAccessToken
                         }
                     }
-                    it("処理状態はエラー表示である") {
+                    it("View状態はエラー表示である") {
                         target.authenticate()
-                        expect(target.processState).toEventuallyNot(beNil())
-                        expect(target.processState!).toEventually(equal(.error(.apiError(.emptyApiAccessToken))))
+                        expect(target.dialogError).toEventuallyNot(beNil())
+                        if let error = target.dialogError {
+                            expect(error).toEventually(equal(.apiError(.emptyApiAccessToken)))
+                        }
                     }
                 }
                 
@@ -163,8 +166,10 @@ final class SignUpViewModelSpec: QuickSpec {
                     }
                     it("処理状態はエラー表示である") {
                         target.authenticate()
-                        expect(target.processState).toEventuallyNot(beNil())
-                        expect(target.processState!).toEventually(equal(.error(.unknown)))
+                        expect(target.dialogError).toEventuallyNot(beNil())
+                        if let error = target.dialogError {
+                            expect(error).toEventually(equal(.unknown))
+                        }
                     }
                 }
             }
