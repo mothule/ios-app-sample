@@ -91,6 +91,7 @@ class SignUpViewModel {
     
     private func setBindings() {
         // TODO: 汎用バリデーションを導入検討
+        // TODO: SignUpViewError形式で返す
         // Email → Email Validation Error
         input.$email
             .compactMap { $0 }
@@ -100,6 +101,7 @@ class SignUpViewModel {
             .assign(to: &output.$emailValidationError)
         
         // TODO: 汎用バリデーションを導入検討
+        // TODO: SignUpViewError形式で返す
         // Password → Password Validation Error
         input.$password
             .compactMap { $0 }
