@@ -16,11 +16,11 @@ enum RepositoryError: Error {
 /// @mockable
 protocol AuthRepository {
     func validToken() async throws
-    func authenticate() async throws
+    func authenticate(email: String, password: String) async throws
 }
 
 struct AuthRepositoryImpl: AuthRepository {
-    func authenticate() async throws {
+    func authenticate(email: String, password: String) async throws {
         return try await withCheckedThrowingContinuation { continuation in
             Thread.sleep(forTimeInterval: 1)
 //            continuation.resume(throwing: RepositoryError.emptyApiAccessToken)

@@ -24,11 +24,11 @@ final class AuthRepositoryMock: AuthRepository {
     }
 
     private(set) var authenticateCallCount = 0
-    var authenticateHandler: (() async throws -> ())?
-    func authenticate() async throws  {
+    var authenticateHandler: ((String, String) async throws -> ())?
+    func authenticate(email: String, password: String) async throws  {
         authenticateCallCount += 1
         if let authenticateHandler = authenticateHandler {
-            try await authenticateHandler()
+            try await authenticateHandler(email, password)
         }
         
     }

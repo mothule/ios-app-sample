@@ -7,12 +7,13 @@
 
 import Quick
 import Nimble
+import Combine
 @testable import ios_auth_flow_sample
 
-extension SignUpViewModel.SignUpState: Equatable {
-    public static func == (lhs: SignUpViewModel.SignUpState, rhs: SignUpViewModel.SignUpState) -> Bool {
+extension SignUpViewModel.AuthenticationState: Equatable {
+    public static func == (lhs: SignUpViewModel.AuthenticationState, rhs: SignUpViewModel.AuthenticationState) -> Bool {
         switch (lhs, rhs) {
-        case (.authenticating, .authenticating):
+        case (.requesting, .requesting):
             return true
         case (.successful, .successful):
             return true
@@ -25,16 +26,7 @@ extension SignUpViewModel.SignUpState: Equatable {
 }
 extension SignUpViewError: Equatable {
     public static func == (lhs: SignUpViewError, rhs: SignUpViewError) -> Bool {
-        switch (lhs, rhs) {
-        case (.formValidationError(let lhError), .formValidationError(let rhError)):
-            return lhError == rhError
-        case (.apiError(let lhError), .apiError(let rhError)):
-            return lhError == rhError
-        case (.unknown, .unknown):
-            return true
-        default:
-            return false
-        }
+        lhs.errorDescription == rhs.errorDescription
     }
 }
 
@@ -52,20 +44,20 @@ final class SignUpViewModelSpec: QuickSpec {
             describe("メールアドレス入力バリデーション") {
                 context("メールアドレスが未入力のとき") {
                     beforeEach {
-                        target.email = ""
+                        target.input.email = ""
                     }
                     it("入力必須バリデーションエラーになる") {
-                        expect(target.emailValidationError).toNot(beNil())
-                        expect(target.emailValidationError) == "email is required"
+                        expect(target.output.emailValidationError).toNot(beNil())
+                        expect(target.output.emailValidationError) == "email is required"
                     }
                 }
                 context("メールアドレスが入力済みのとき") {
                     beforeEach {
-                        target.email = "asdf"
+                        target.input.email = "asdf"
                     }
                     it("バリデーションエラーは空である") {
-                        expect(target.emailValidationError).toNot(beNil())
-                        expect(target.emailValidationError).to(beEmpty())
+                        expect(target.output.emailValidationError).toNot(beNil())
+                        expect(target.output.emailValidationError).to(beEmpty())
                     }
                 }
             }
@@ -73,28 +65,28 @@ final class SignUpViewModelSpec: QuickSpec {
             describe("パスワード入力バリデーション") {
                 context("パスワードが未入力のとき") {
                     beforeEach {
-                        target.password = ""
+                        target.input.password = ""
                     }
                     it("入力必須バリデーションエラーになる") {
-                        expect(target.passwordValidationError) == "Required password"
+                        expect(target.output.passwordValidationError) == "Required password"
                     }
                 }
                 
                 context("パスワードが文字数不足のとき") {
                     beforeEach {
-                        target.password = "1234567"
+                        target.input.password = "1234567"
                     }
                     it("文字数不足バリデーションエラーになる") {
-                        expect(target.passwordValidationError) == "Password length should higher 7 length"
+                        expect(target.output.passwordValidationError) == "Password length should higher 7 length"
                     }
                 }
                 
                 context("パスワードが文字数超過のとき") {
                     beforeEach {
-                        target.password = String(repeating: "a", count: 65)
+                        target.input.password = String(repeating: "a", count: 65)
                     }
                     it("文字数オーバーバリデーションエラーになる") {
-                        expect(target.passwordValidationError) == "Password length should lower 65 length"
+                        expect(target.output.passwordValidationError) == "Password length should lower 65 length"
                     }
                 }
                 
@@ -105,8 +97,8 @@ final class SignUpViewModelSpec: QuickSpec {
                     ]
                     it("バリデーションエラーは空である") {
                         pattern.forEach {
-                            target.password = $0
-                            expect(target.passwordValidationError).to(beEmpty(), description: "エラー起きてる. patten: \($0)")
+                            target.input.password = $0
+                            expect(target.output.passwordValidationError).to(beEmpty(), description: "エラー起きてる. patten: \($0)")
                         }
                     }
                 }
@@ -115,63 +107,71 @@ final class SignUpViewModelSpec: QuickSpec {
             describe("認証の有効状態") {
                 context("バリデーションエラー有りのとき") {
                     it("認証は無効状態である") {
-                        expect(target.isEnabledSignUp) == false
+                        expect(target.output.isEnabledSignUp) == false
                     }
                 }
                 context("バリデーションエラー無し") {
                     beforeEach {
-                        target.email = "address@domain.com"
-                        target.password = "valid password"
+                        target.input.email = "address@domain.com"
+                        target.input.password = "valid password"
                     }
                     it("認証は有効状態である") {
-                        target.authenticate()
-                        expect(target.isEnabledSignUp) == true
+                        target.input.authenticateSubject.send()
+                        expect(target.output.isEnabledSignUp) == true
                     }
                 }
             }
 
             describe("認証プロセス") {
+                var route: SignUpViewModel.Route?
+                var dialogError: SignUpViewError?
+                var cancellables: Set<AnyCancellable> = []
                 beforeEach {
-                    target.email = "address@domain.com"
-                    target.password = "valid password"
+                    route = nil
+                    cancellables = []
+                    target.output.routePublisher.sink { route = $0 }.store(in: &cancellables)
+                    target.output.$dialogError.sink { dialogError = $0 }.store(in: &cancellables)
+                    
+                    target.input.email = "address@domain.com"
+                    target.input.password = "valid password"
                 }
                 context("認証プロセスが成功したとき") {
                     it("View状態はウォークスルー遷移である") {
-                        target.authenticate()
-                        expects(target.route).toEventually(equal(.navigateOnboardingWalkThrough))
-                        expects(target.isShownProgress).to(beFalse())
+                        target.input.authenticateSubject.send()
+                        expects(route).toEventually(equal(.navigateOnboardingWalkThrough))
+                        expects(target.output.isShownProgress).toEventually(beFalse())
                     }
                 }
                 
                 context("通信エラー発生したとき") {
                     beforeEach {
-                        mockAuthRepository.authenticateHandler = {
+                        mockAuthRepository.authenticateHandler = { _, _ in
                             throw RepositoryError.emptyApiAccessToken
                         }
                     }
                     it("View状態はエラー表示である") {
-                        target.authenticate()
-                        expect(target.dialogError).toEventuallyNot(beNil())
-                        if let error = target.dialogError {
-                            expect(error).toEventually(equal(.apiError(.emptyApiAccessToken)))
+                        target.input.authenticateSubject.send()
+                        expect(dialogError).toEventuallyNot(beNil())
+                        if let error = dialogError {
+                            expect(error).toEventually(equal(.apiError(repositoryError: .emptyApiAccessToken)))
                         }
                     }
                 }
-                
                 context("想定外エラー発生したとき") {
                     beforeEach {
-                        mockAuthRepository.authenticateHandler = {
+                        mockAuthRepository.authenticateHandler = { _, _ in
                             throw NSError(domain: "domain", code: -1001)
                         }
                     }
                     it("処理状態はエラー表示である") {
-                        target.authenticate()
-                        expect(target.dialogError).toEventuallyNot(beNil())
-                        if let error = target.dialogError {
-                            expect(error).toEventually(equal(.unknown))
+                        target.input.authenticateSubject.send()
+                        expect(dialogError).toEventuallyNot(beNil())
+                        if let error = dialogError {
+                            expect(error).toEventually(equal(.unknown()))
                         }
                     }
                 }
+                
             }
         }
     }

@@ -157,7 +157,7 @@ class SignUpViewController: UIViewController {
     
     
     private func setBindings() {
-        viewModel.$dialogError
+        viewModel.output.$dialogError
             .compactMap { $0 }
             .sink { [unowned self] error in
                 let alert = UIAlertController(
@@ -170,8 +170,7 @@ class SignUpViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        viewModel.$route
-            .compactMap { $0 }
+        viewModel.output.routePublisher
             .sink { [unowned self] route in
                 switch route {
                 case .navigateOnboardingWalkThrough:
@@ -180,14 +179,14 @@ class SignUpViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        viewModel.$isShownProgress
+        viewModel.output.$isShownProgress
             .receive(on: RunLoop.main)
             .sink { isShownProgress in
                 // TODO: Show progress view
             }
             .store(in: &cancellables)
         
-        viewModel.$isEnabledSignUp
+        viewModel.output.$isEnabledSignUp
             .receive(on: RunLoop.main)
             .sink { [unowned self] isEnabled in
                 signUpButton.isEnabled = isEnabled
@@ -197,18 +196,30 @@ class SignUpViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        viewModel.$emailValidationError
+        viewModel.output.$emailValidationError
             .assign(to: \.text, on: emailValidationResultLabel)
             .store(in: &cancellables)
         
-        viewModel.$passwordValidationError
+        viewModel.output.$passwordValidationError
             .assign(to: \.text, on: passwordValidationResultLabel)
+            .store(in: &cancellables)
+        viewModel.output.$dialogError
+            .compactMap { $0 }
+            .sink { [unowned self] signUpViewError in
+                let alert = UIAlertController(
+                    title: "ERROR",
+                    message: signUpViewError.errorDescription,
+                    preferredStyle: .alert
+                )
+                alert.addAction(.init(title: "OK", style: .destructive))
+                present(alert, animated: true)
+            }
             .store(in: &cancellables)
         
         
         // Bindings View → ViewModel
         signUpButton.tapPublisher.sink { [unowned self] _ in
-            viewModel.authenticate()
+            viewModel.input.authenticateSubject.send()
         }
         .store(in: &cancellables)
         
@@ -217,14 +228,14 @@ class SignUpViewController: UIViewController {
             .compactMap({ $0.object as? UITextField })
             .map({ $0.text })
             .replaceNil(with: "")
-            .assign(to: &viewModel.$email)
+            .assign(to: &viewModel.input.$email)
         
         NotificationCenter.default
             .publisher(for: UITextField.textDidChangeNotification, object: passwordTextField)
             .compactMap({ $0.object as? UITextField })
             .map({ $0.text })
             .replaceNil(with: "")
-            .assign(to: &viewModel.$password)
+            .assign(to: &viewModel.input.$password)
         
     }
     
