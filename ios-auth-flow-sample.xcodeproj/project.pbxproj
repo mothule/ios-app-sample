@@ -386,6 +386,7 @@
 		};
 		543522ED2B08DA4100A531F9 /* Run mockolo */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
