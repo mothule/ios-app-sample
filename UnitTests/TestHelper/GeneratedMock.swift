@@ -4,7 +4,6 @@
 
 #if DEBUG
 
-import Defaults
 import Foundation
 @testable import ios_auth_flow_sample
 
@@ -23,14 +22,14 @@ final class AuthRepositoryMock: AuthRepository {
         
     }
 
-    private(set) var authenticateCallCount = 0
-    var authenticateHandler: ((String, String) async throws -> ())?
-    func authenticate(email: String, password: String) async throws  {
-        authenticateCallCount += 1
-        if let authenticateHandler = authenticateHandler {
-            try await authenticateHandler(email, password)
+    private(set) var authenticateWithEmailCallCount = 0
+    var authenticateWithEmailHandler: ((EmailAuthenticationCredential) async throws -> (UserAccount))?
+    func authenticateWithEmail(credential: EmailAuthenticationCredential) async throws -> UserAccount {
+        authenticateWithEmailCallCount += 1
+        if let authenticateWithEmailHandler = authenticateWithEmailHandler {
+            return try await authenticateWithEmailHandler(credential)
         }
-        
+        fatalError("authenticateWithEmailHandler returns can't have a default value thus its handler must be set")
     }
 }
 

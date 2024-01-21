@@ -24,9 +24,10 @@ extension SignUpViewModel.AuthenticationState: Equatable {
         }
     }
 }
-extension SignUpViewError: Equatable {
-    public static func == (lhs: SignUpViewError, rhs: SignUpViewError) -> Bool {
-        lhs.errorDescription == rhs.errorDescription
+extension DomainError: Equatable {
+    public static func == (lhs: DomainError, rhs: DomainError) -> Bool {
+        return lhs.errorDescription == rhs.errorDescription &&
+        lhs.code == rhs.code
     }
 }
 
@@ -114,6 +115,9 @@ final class SignUpViewModelSpec: QuickSpec {
                     beforeEach {
                         target.input.email = "address@domain.com"
                         target.input.password = "valid password"
+                        mockAuthRepository.authenticateWithEmailHandler = { _ in
+                            .init(accessToken: "valid-accesstoken")
+                        }
                     }
                     it("認証は有効状態である") {
                         target.input.authenticateSubject.send()
@@ -124,7 +128,7 @@ final class SignUpViewModelSpec: QuickSpec {
 
             describe("認証プロセス") {
                 var route: SignUpViewModel.Route?
-                var dialogError: SignUpViewError?
+                var dialogError: DomainError?
                 var cancellables: Set<AnyCancellable> = []
                 beforeEach {
                     route = nil
@@ -136,16 +140,20 @@ final class SignUpViewModelSpec: QuickSpec {
                     target.input.password = "valid password"
                 }
                 context("認証プロセスが成功したとき") {
+                    beforeEach {
+                        mockAuthRepository.authenticateWithEmailHandler = { _ in
+                            return .init(accessToken: "valid-accesstoken")
+                        }
+                    }
                     it("View状態はウォークスルー遷移である") {
                         target.input.authenticateSubject.send()
                         expects(route).toEventually(equal(.navigateOnboardingWalkThrough))
                         expects(target.output.isShownProgress).toEventually(beFalse())
                     }
                 }
-                
                 context("通信エラー発生したとき") {
                     beforeEach {
-                        mockAuthRepository.authenticateHandler = { _, _ in
+                        mockAuthRepository.authenticateWithEmailHandler = { _ in
                             throw RepositoryError.emptyApiAccessToken
                         }
                     }
@@ -153,13 +161,13 @@ final class SignUpViewModelSpec: QuickSpec {
                         target.input.authenticateSubject.send()
                         expect(dialogError).toEventuallyNot(beNil())
                         if let error = dialogError {
-                            expect(error).toEventually(equal(.apiError(repositoryError: .emptyApiAccessToken)))
+                            expect(error).toEventually(equal(.fromRepositoryError(.emptyApiAccessToken)))
                         }
                     }
                 }
                 context("想定外エラー発生したとき") {
                     beforeEach {
-                        mockAuthRepository.authenticateHandler = { _, _ in
+                        mockAuthRepository.authenticateWithEmailHandler = { _ in
                             throw NSError(domain: "domain", code: -1001)
                         }
                     }
@@ -167,11 +175,10 @@ final class SignUpViewModelSpec: QuickSpec {
                         target.input.authenticateSubject.send()
                         expect(dialogError).toEventuallyNot(beNil())
                         if let error = dialogError {
-                            expect(error).toEventually(equal(.unknown()))
+                            expect(error).toEventually(equal(.unknown(error: error)))
                         }
                     }
                 }
-                
             }
         }
     }

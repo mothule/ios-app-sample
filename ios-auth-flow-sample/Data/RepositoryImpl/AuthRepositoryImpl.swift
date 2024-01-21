@@ -8,23 +8,12 @@
 import Foundation
 import Defaults
 
-enum RepositoryError: Error {
-    case emptyApiAccessToken
-    case invalidApiAccessToken
-}
-
-/// @mockable
-protocol AuthRepository {
-    func validToken() async throws
-    func authenticate(email: String, password: String) async throws
-}
-
 struct AuthRepositoryImpl: AuthRepository {
-    func authenticate(email: String, password: String) async throws {
+    func authenticateWithEmail(credential: EmailAuthenticationCredential) async throws -> UserAccount {
         return try await withCheckedThrowingContinuation { continuation in
             Thread.sleep(forTimeInterval: 1)
 //            continuation.resume(throwing: RepositoryError.emptyApiAccessToken)
-            continuation.resume()
+            continuation.resume(returning: .init(accessToken: "asdfasdfasdf"))
         }
     }
     

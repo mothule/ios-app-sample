@@ -22,6 +22,12 @@
 		546110C02AAB18610049588A /* AuthValidRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110BF2AAB18610049588A /* AuthValidRequest.swift */; };
 		546110C32AAB2EE90049588A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110C22AAB2EE90049588A /* SignUpViewController.swift */; };
 		546110C52AAB2EFC0049588A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110C42AAB2EFC0049588A /* SignUpViewModel.swift */; };
+		546C6E642B5CE26B00AF4C22 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E632B5CE26B00AF4C22 /* DomainError.swift */; };
+		546C6E682B5CE66500AF4C22 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E672B5CE66500AF4C22 /* AuthRepository.swift */; };
+		546C6E6A2B5CE92700AF4C22 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E692B5CE92700AF4C22 /* RepositoryError.swift */; };
+		546C6E6D2B5CEA4C00AF4C22 /* UserAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E6C2B5CEA4C00AF4C22 /* UserAccount.swift */; };
+		546C6E702B5CEC7B00AF4C22 /* UserAuthenticationUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E6F2B5CEC7B00AF4C22 /* UserAuthenticationUsecase.swift */; };
+		546C6E732B5CED3300AF4C22 /* EmailAuthenticationCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E722B5CED3300AF4C22 /* EmailAuthenticationCredential.swift */; };
 		5490E4AB2AE43799007FFC6E /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5490E4AA2AE43799007FFC6E /* UIView+Ext.swift */; };
 		5490E4AD2AE45F9B007FFC6E /* Tappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5490E4AC2AE45F9B007FFC6E /* Tappable.swift */; };
 		54B1DA602AFED1A800A5A2C3 /* SignUpViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B1DA5F2AFED1A800A5A2C3 /* SignUpViewModelSpec.swift */; };
@@ -57,6 +63,12 @@
 		546110BF2AAB18610049588A /* AuthValidRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidRequest.swift; sourceTree = "<group>"; };
 		546110C22AAB2EE90049588A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		546110C42AAB2EFC0049588A /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		546C6E632B5CE26B00AF4C22 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
+		546C6E672B5CE66500AF4C22 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		546C6E692B5CE92700AF4C22 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
+		546C6E6C2B5CEA4C00AF4C22 /* UserAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAccount.swift; sourceTree = "<group>"; };
+		546C6E6F2B5CEC7B00AF4C22 /* UserAuthenticationUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuthenticationUsecase.swift; sourceTree = "<group>"; };
+		546C6E722B5CED3300AF4C22 /* EmailAuthenticationCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailAuthenticationCredential.swift; sourceTree = "<group>"; };
 		5490E4AA2AE43799007FFC6E /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		5490E4AC2AE45F9B007FFC6E /* Tappable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tappable.swift; sourceTree = "<group>"; };
 		54B1DA532AFED08F00A5A2C3 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				546110B22AAB00020049588A /* Presentation */,
+				546C6E652B5CE62700AF4C22 /* Domain */,
 				546110B52AAB0E3F0049588A /* Data */,
 				546110A72AAAF4E10049588A /* Assets.xcassets */,
 				546110AC2AAAF4E10049588A /* Info.plist */,
@@ -150,9 +163,9 @@
 		546110B52AAB0E3F0049588A /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				546110B62AAB0E550049588A /* RepositoryImpl */,
 				546110BC2AAB14D90049588A /* ApiClient */,
 				546110B92AAB0FDE0049588A /* UserDefaults */,
-				546110B62AAB0E550049588A /* RepositoryImpl */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -161,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				546110B72AAB0E840049588A /* AuthRepositoryImpl.swift */,
+				546C6E692B5CE92700AF4C22 /* RepositoryError.swift */,
 			);
 			path = RepositoryImpl;
 			sourceTree = "<group>";
@@ -189,6 +203,58 @@
 				546110C42AAB2EFC0049588A /* SignUpViewModel.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		546C6E622B5CE25100AF4C22 /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				546C6E632B5CE26B00AF4C22 /* DomainError.swift */,
+			);
+			path = Error;
+			sourceTree = "<group>";
+		};
+		546C6E652B5CE62700AF4C22 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				546C6E6E2B5CEC5700AF4C22 /* Usecase */,
+				546C6E6B2B5CE9C900AF4C22 /* Entity */,
+				546C6E712B5CED0700AF4C22 /* ValueObject */,
+				546C6E662B5CE64700AF4C22 /* Repository */,
+				546C6E622B5CE25100AF4C22 /* Error */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		546C6E662B5CE64700AF4C22 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				546C6E672B5CE66500AF4C22 /* AuthRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		546C6E6B2B5CE9C900AF4C22 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				546C6E6C2B5CEA4C00AF4C22 /* UserAccount.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		546C6E6E2B5CEC5700AF4C22 /* Usecase */ = {
+			isa = PBXGroup;
+			children = (
+				546C6E6F2B5CEC7B00AF4C22 /* UserAuthenticationUsecase.swift */,
+			);
+			path = Usecase;
+			sourceTree = "<group>";
+		};
+		546C6E712B5CED0700AF4C22 /* ValueObject */ = {
+			isa = PBXGroup;
+			children = (
+				546C6E722B5CED3300AF4C22 /* EmailAuthenticationCredential.swift */,
+			);
+			path = ValueObject;
 			sourceTree = "<group>";
 		};
 		5490E4A92AE4372F007FFC6E /* Library */ = {
@@ -454,14 +520,20 @@
 				5490E4AB2AE43799007FFC6E /* UIView+Ext.swift in Sources */,
 				5490E4AD2AE45F9B007FFC6E /* Tappable.swift in Sources */,
 				546110A32AAAF4DF0049588A /* RootViewController.swift in Sources */,
+				546C6E642B5CE26B00AF4C22 /* DomainError.swift in Sources */,
+				546C6E702B5CEC7B00AF4C22 /* UserAuthenticationUsecase.swift in Sources */,
 				546110C52AAB2EFC0049588A /* SignUpViewModel.swift in Sources */,
 				546110BB2AAB0FF20049588A /* DefaultsKeys.swift in Sources */,
 				546110C02AAB18610049588A /* AuthValidRequest.swift in Sources */,
+				546C6E6D2B5CEA4C00AF4C22 /* UserAccount.swift in Sources */,
 				5461109F2AAAF4DF0049588A /* AppDelegate.swift in Sources */,
 				546110B42AAB04800049588A /* RootViewModel.swift in Sources */,
 				546110C32AAB2EE90049588A /* SignUpViewController.swift in Sources */,
+				546C6E682B5CE66500AF4C22 /* AuthRepository.swift in Sources */,
 				546110B82AAB0E840049588A /* AuthRepositoryImpl.swift in Sources */,
 				546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */,
+				546C6E6A2B5CE92700AF4C22 /* RepositoryError.swift in Sources */,
+				546C6E732B5CED3300AF4C22 /* EmailAuthenticationCredential.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

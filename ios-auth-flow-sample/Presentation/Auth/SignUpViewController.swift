@@ -197,10 +197,12 @@ class SignUpViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.output.$emailValidationError
+            .map { $0?.errorDescription }
             .assign(to: \.text, on: emailValidationResultLabel)
             .store(in: &cancellables)
         
         viewModel.output.$passwordValidationError
+            .map { $0?.errorDescription }
             .assign(to: \.text, on: passwordValidationResultLabel)
             .store(in: &cancellables)
         viewModel.output.$dialogError
