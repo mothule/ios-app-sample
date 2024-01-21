@@ -8,31 +8,40 @@
 import Foundation
 import Combine
 
-enum SignUpViewError: Error {
-    case formValidationError(EmailAuthenticationValidationResult)
-    case apiError(RepositoryError)
-    case unknown
+extension SignUpViewModel {
+    // TODO: 汎用Validatorの導入検討. ValidatedPropertyKitは検証条件毎(.isEmpty, isEmail)にエラー情報を付与できない. またDefaultsと宣言が衝突してるエラーが発生する
+    struct ValidationResult {
+        var errorDescription: String?
+        
+        var isSucceed: Bool { errorDescription?.isEmpty ?? true }
+        
+        static func success() -> Self {
+            .init(errorDescription: nil)
+        }
+        static func emailRequired() -> Self {
+            .init(errorDescription: "メールアドレスを入力してください")
+        }
+        static func emailInvalidFormat() -> Self {
+            .init(errorDescription: "無効なメールアドレスです")
+        }
+        static func passwordRequired() -> Self {
+            .init(errorDescription: "パスワードを入力してください")
+        }
+        static func passwordMinLength() -> Self {
+            .init(errorDescription: "パスワードが短すぎます")
+        }
+        static func passwordMaxLength() -> Self {
+            .init(errorDescription: "パスワードが長すぎます")
+        }
+    }
 }
 
-
-// TODO: 汎用フォームバリデーション用エラーに差し替える
-enum EmailAuthenticationValidationResult: Error {
-    case successful
-    case emailRequired
-    case emailInvalidFormat
-    case passwordRequired
-    case passwordMinLength
-    case passwordMaxLength
-}
 
 class SignUpViewModel {
-    enum SignUpState {
-        /// 認証APIリクエスト中
-        case authenticating
-        /// 認証成功した
+    enum AuthenticationState {
+        case requesting
         case successful
-        /// 認証失敗
-        case error(SignUpViewError)
+        case error(DomainError)
     }
     
     enum Route {
@@ -40,83 +49,88 @@ class SignUpViewModel {
         case navigateOnboardingWalkThrough
     }
     
-    // INPUT
-    @Published var email: String = ""
-    @Published var password: String = ""
-    
-    // INTERNAL
-    @Published private var signUpState: SignUpState?
-
-    // OUTPUT
-    @Published private(set) var isEnabledSignUp: Bool = false
-    @Published private(set) var emailValidationError: String?
-    @Published private(set) var passwordValidationError: String?
-    @Published private(set) var isShownProgress: Bool = false
-    @Published private(set) var route: Route?
-    @Published private(set) var dialogError: SignUpViewError?
-    
-    private var cancellables: Set<AnyCancellable> = []
-    private let authRepository: AuthRepository
-    
-    init(authRepository: AuthRepository = AuthRepositoryImpl()) {
-        self.authRepository = authRepository
-        setBindings()
-    }
-    
-    func authenticate() {
-        Task { [weak self] in
-            do {
-                self?.signUpState = .authenticating
-                try await self?.authRepository.authenticate()
-                self?.signUpState = .successful
-                
-            } catch let error as RepositoryError {
-                self?.signUpState = .error(.apiError(error))
-                
-            } catch {
-                self?.signUpState = .error(.unknown)
-            }
+    class Input {
+        @Published 
+        var email: String?
+        
+        @Published 
+        var password: String?
+        
+        var authenticateSubject: PassthroughSubject<Void, Never> = .init()
+        
+        init(email: String? = nil, password: String? = nil, authenticateSubject: PassthroughSubject<Void, Never> = .init()) {
+            self.email = email
+            self.password = password
+            self.authenticateSubject = authenticateSubject
         }
     }
     
-    private func setBindings() {
-        // TODO: 汎用バリデーションを導入検討
-        // Email → Email Validation Error
-        $email
-            .dropFirst() // 初期値はユーザ無関係なので破棄
-            .map { email in
-                email.isEmpty ? "email is required" : ""
-            }
-            .assign(to: &$emailValidationError)
+    class Output {
+        @Published var isEnabledSignUp: Bool = false
+        @Published var emailValidationError: ValidationResult?
+        @Published var passwordValidationError: ValidationResult?
+        @Published var isShownProgress: Bool = false
+        @Published var dialogError: DomainError?
         
-        // TODO: 汎用バリデーションを導入検討
+        fileprivate var routeSubject: PassthroughSubject<Route, Never> = .init()
+        var routePublisher: any Publisher<Route, Never> { routeSubject }
+    }
+    
+    var input: Input = .init()
+    private(set) var output: Output = .init()
+    // INTERNAL
+    @Published private var authState: AuthenticationState?
+    
+    private var cancellables: Set<AnyCancellable> = []
+    private let userAuthenticationUsecase: UserAuthenticationUsecase
+    
+    init(authRepository: AuthRepository = AuthRepositoryImpl()) {
+        self.userAuthenticationUsecase = .init(authRepository: authRepository)
+        setBindings()
+    }
+    
+    private func setBindings() {
+        // Email → Email Validation Error
+        input.$email
+            .compactMap { $0 } // ignore nil
+            .map { email in
+                email.isEmpty ? .emailRequired() : .success()
+            }
+            .assign(to: &output.$emailValidationError)
+        
         // Password → Password Validation Error
-        $password
-            .dropFirst() // 初期値はユーザ無関係なので破棄
+        input.$password
+            .compactMap { $0 } // ignore nil
             .map { password in
                 if password.isEmpty {
-                    return "Required password"
+                    return .passwordRequired()
                 } else if password.count < 8 {
-                    return "Password length should higher 7 length"
+                    return .passwordMinLength()
                 } else if password.count > 64 {
-                    return "Password length should lower 65 length"
+                    return .passwordMaxLength()
                 } else {
-                    return ""
+                    return .success()
                 }
             }
-            .assign(to: &$passwordValidationError)
+            .assign(to: &output.$passwordValidationError)
         
+        input.authenticateSubject
+            .sink { [unowned self] in
+                authenticate()
+            }
+            .store(in: &cancellables)
         
         // バリデーションエラーが1件もない and 処理状態が初期状態またはエラー なら認証ボタンを有効化
         // (Email Validation Error is Empty & Password Validation Error is Empty) & SignUp State nil or error = isEnabledSignUp
         Publishers.CombineLatest(
-            Publishers.CombineLatest($emailValidationError, $passwordValidationError)
-                .map {
-                    guard let emailError = $0 else { return false }
-                    guard let passwordError = $1 else { return false }
-                    return emailError.isEmpty && passwordError.isEmpty
-                }
-            , $signUpState
+            Publishers.CombineLatest(
+                output.$emailValidationError, output.$passwordValidationError
+            )
+            .map {
+                guard let email = $0, let password = $1 else { return false }
+                return email.isSucceed && password.isSucceed
+            }
+            , $authState
                 .map {
                     switch $0 {
                     case .none, .error: return true
@@ -125,31 +139,52 @@ class SignUpViewModel {
                 }
         )
         .map { $0 && $1 }
-        .assign(to: &$isEnabledSignUp)
+        .assign(to: &output.$isEnabledSignUp)
         
         // SignUp State → isShownProgress
-        $signUpState
+        $authState
             .compactMap { $0 }
             .map { state in
-                if case .authenticating = state { return true }
+                if case .requesting = state { return true }
                 else { return false }
             }
-            .assign(to: &$isShownProgress)
+            .assign(to: &output.$isShownProgress)
         
         // SignUp State is successful → Rouote
         //              is error → Dialog Error
-        $signUpState
+        $authState
             .compactMap { $0 }
             .receive(on: RunLoop.main)
             .sink { [unowned self] state in
                 switch state {
-                case .authenticating: break
+                case .requesting: break
                 case .successful:
-                    route = .navigateOnboardingWalkThrough
+                    output.routeSubject.send(.navigateOnboardingWalkThrough)
                 case .error(let error):
-                    dialogError = error
+                    output.dialogError = error
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    private func authenticate() {
+        guard let email = input.email,
+              let password = input.password else {
+            preconditionFailure("Program Exception.")
+        }
+        
+        Task { [weak self] in
+            do {
+                self?.authState = .requesting
+                let userAccount = try await self?.userAuthenticationUsecase.signUpWithEmail(credential: .init(email: email, password: password))
+                self?.authState = .successful
+                
+            } catch let error as DomainError {
+                self?.authState = .error(error)
+                
+            } catch {
+                fatalError("Program Exception: 起きうる全例外をキャッチできていない. \(error)")
+            }
+        }
     }
 }
