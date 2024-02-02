@@ -47,6 +47,24 @@ class SignUpViewController: UIViewController {
         $0.isSecureTextEntry = true
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    // TODO: Modal Indicator View Componentとして抽出を検討する
+    private lazy var modalIndicatorView: UIView = .init().tap {
+        $0.backgroundColor = .init(white: 0.0, alpha: 0.5)
+        $0.isUserInteractionEnabled = false
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.isHidden = true
+        
+        let activityIndicator = UIActivityIndicatorView(style: .large).tap {
+            $0.color = .white
+            $0.startAnimating()
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        $0.addSubview(activityIndicator)
+        
+        $0.centerXAnchor.constraint(equalTo: activityIndicator.centerXAnchor).isActive = true
+        $0.centerYAnchor.constraint(equalTo: activityIndicator.centerYAnchor).isActive = true
+    }
 
     override func loadView() {
         self.view = UIView(frame: UIScreen.main.bounds)
@@ -83,6 +101,7 @@ class SignUpViewController: UIViewController {
             $0.addArrangedSubview(signUpButton)
         }
         self.view.addSubview(container)
+        self.view.addSubview(modalIndicatorView)
         
         self.view.addConstraints({() -> [NSLayoutConstraint] in
             NSLayoutConstraint.constraints(
@@ -130,6 +149,16 @@ class SignUpViewController: UIViewController {
                 metrics: nil,
                 views: ["button": signUpButton]
             )
+            + NSLayoutConstraint.constraints(
+                withVisualFormat: "|[indicator]|",
+                metrics: nil,
+                views: ["indicator": modalIndicatorView]
+            )
+            + NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|[indicator]|",
+                metrics: nil,
+                views: ["indicator": modalIndicatorView]
+            )
         }())
         container.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         container.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -167,8 +196,8 @@ class SignUpViewController: UIViewController {
         
         viewModel.output.$isShownProgress
             .receive(on: RunLoop.main)
-            .sink { isShownProgress in
-                // TODO: Show progress view
+            .sink { [unowned self] isShownProgress in
+                modalIndicatorView.isHidden = !isShownProgress
             }
             .store(in: &cancellables)
         
