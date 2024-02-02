@@ -58,45 +58,31 @@ class SignUpViewController: UIViewController {
             $0.backgroundColor = .white
             $0.layer.cornerRadius = 8.0
             $0.translatesAutoresizingMaskIntoConstraints = false
+            $0.addArrangedSubview(UILabel().tap {
+                $0.font = UIFont.boldSystemFont(ofSize: 24.0)
+                $0.text = "SIGN UP"
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            })
+            $0.addArrangedSubview(.verticalSpacer(32))
+            $0.addArrangedSubview(UILabel().tap {
+                $0.text = "Email"
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            })
+            $0.addArrangedSubview(.verticalSpacer(4))
+            $0.addArrangedSubview(emailTextField)
+            $0.addArrangedSubview(emailValidationResultLabel)
+            $0.addArrangedSubview(.verticalSpacer(8))
+            $0.addArrangedSubview(UILabel().tap {
+                $0.text = "Password"
+                $0.translatesAutoresizingMaskIntoConstraints = false
+            })
+            $0.addArrangedSubview(.verticalSpacer(4))
+            $0.addArrangedSubview(passwordTextField)
+            $0.addArrangedSubview(passwordValidationResultLabel)
+            $0.addArrangedSubview(.verticalSpacer(16))
+            $0.addArrangedSubview(signUpButton)
         }
         self.view.addSubview(container)
-        
-        let titleLabel: UILabel = .init().tap {
-            $0.font = UIFont.boldSystemFont(ofSize: 24.0)
-            $0.text = "SIGN UP"
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        container.addArrangedSubview(titleLabel)
-        
-        container.addArrangedSubview(.verticalSpacer(32))
-        
-        let emailLabel: UILabel = .init().tap {
-            $0.text = "Email"
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        container.addArrangedSubview(emailLabel)
-        
-        container.addArrangedSubview(.verticalSpacer(4))
-
-        container.addArrangedSubview(emailTextField)
-        container.addArrangedSubview(emailValidationResultLabel)
-        
-        container.addArrangedSubview(.verticalSpacer(8))
-        
-        let passwordLabel: UILabel = .init().tap {
-            $0.text = "Password"
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        container.addArrangedSubview(passwordLabel)
-        
-        container.addArrangedSubview(.verticalSpacer(4))
-        
-        container.addArrangedSubview(passwordTextField)
-        container.addArrangedSubview(passwordValidationResultLabel)
-        
-        container.addArrangedSubview(.verticalSpacer(16))
-        
-        container.addArrangedSubview(signUpButton)
         
         self.view.addConstraints({() -> [NSLayoutConstraint] in
             NSLayoutConstraint.constraints(
