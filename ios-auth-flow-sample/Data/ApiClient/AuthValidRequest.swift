@@ -7,19 +7,10 @@
 
 import Foundation
 
-protocol ApiRequestable: Encodable {
-    
+struct AuthValidRequest {
 }
 
-protocol ApiResponsable: Decodable {
-    
-}
-
-struct AuthValidRequest: ApiRequestable {
-    
-}
-
-struct AuthValidResponse: ApiResponsable {
+struct AuthValidResponse: HttpResponsable {
     var accessToken: String
     var refreshToken: String
 }

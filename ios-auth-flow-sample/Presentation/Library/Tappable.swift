@@ -15,5 +15,12 @@ extension Tappable where Self: NSObject {
         return self
     }
 }
+extension Tappable {
+    func tap(block: (Self) -> ()) -> Self {
+        block(self)
+        return self
+    }
+}
 
 extension NSObject: Tappable {}
+extension JSONDecoder: Tappable {}
