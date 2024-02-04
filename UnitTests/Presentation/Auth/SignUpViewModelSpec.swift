@@ -49,7 +49,7 @@ final class SignUpViewModelSpec: QuickSpec {
                     }
                     it("入力必須バリデーションエラーになる") {
                         expect(target.output.emailValidationError).toNot(beNil())
-                        expect(target.output.emailValidationError) == "email is required"
+                        expect(target.output.emailValidationError?.errorDescription) == "メールアドレスを入力してください"
                     }
                 }
                 context("メールアドレスが入力済みのとき") {
@@ -58,7 +58,7 @@ final class SignUpViewModelSpec: QuickSpec {
                     }
                     it("バリデーションエラーは空である") {
                         expect(target.output.emailValidationError).toNot(beNil())
-                        expect(target.output.emailValidationError).to(beEmpty())
+                        expect(target.output.emailValidationError?.isSucceed).to(beTrue())
                     }
                 }
             }
@@ -69,7 +69,7 @@ final class SignUpViewModelSpec: QuickSpec {
                         target.input.password = ""
                     }
                     it("入力必須バリデーションエラーになる") {
-                        expect(target.output.passwordValidationError) == "Required password"
+                        expect(target.output.passwordValidationError?.errorDescription) == "パスワードを入力してください"
                     }
                 }
                 
@@ -78,7 +78,7 @@ final class SignUpViewModelSpec: QuickSpec {
                         target.input.password = "1234567"
                     }
                     it("文字数不足バリデーションエラーになる") {
-                        expect(target.output.passwordValidationError) == "Password length should higher 7 length"
+                        expect(target.output.passwordValidationError?.errorDescription) == "パスワードが短すぎます"
                     }
                 }
                 
@@ -87,7 +87,7 @@ final class SignUpViewModelSpec: QuickSpec {
                         target.input.password = String(repeating: "a", count: 65)
                     }
                     it("文字数オーバーバリデーションエラーになる") {
-                        expect(target.output.passwordValidationError) == "Password length should lower 65 length"
+                        expect(target.output.passwordValidationError?.errorDescription) == "パスワードが長すぎます"
                     }
                 }
                 
@@ -99,7 +99,7 @@ final class SignUpViewModelSpec: QuickSpec {
                     it("バリデーションエラーは空である") {
                         pattern.forEach {
                             target.input.password = $0
-                            expect(target.output.passwordValidationError).to(beEmpty(), description: "エラー起きてる. patten: \($0)")
+                            expect(target.output.passwordValidationError?.isSucceed).to(beTrue(), description: "エラー起きてる. patten: \($0)")
                         }
                     }
                 }

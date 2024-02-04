@@ -9,7 +9,10 @@
 /* Begin PBXBuildFile section */
 		07BC6C2FA470D95A606B27D1 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30208152F4FE732FE3E117E3 /* Pods_UnitTests.framework */; };
 		1B23936D7E045DC15673F9BB /* Pods_ios_auth_flow_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7668C0B8189788E793F16F2 /* Pods_ios_auth_flow_sample.framework */; };
+		5434E9462B6F8E20009D44E4 /* TappableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434E9452B6F8E20009D44E4 /* TappableSpec.swift */; };
+		5434E9482B6FF202009D44E4 /* DecodingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434E9472B6FF202009D44E4 /* DecodingStrategy.swift */; };
 		543522EC2B08D9FA00A531F9 /* GeneratedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */; };
+		545968462B6E1426002591B4 /* ApiClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545968452B6E1426002591B4 /* ApiClientSpec.swift */; };
 		5461109F2AAAF4DF0049588A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461109E2AAAF4DF0049588A /* AppDelegate.swift */; };
 		546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110A02AAAF4DF0049588A /* SceneDelegate.swift */; };
 		546110A32AAAF4DF0049588A /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110A22AAAF4DF0049588A /* RootViewController.swift */; };
@@ -48,7 +51,10 @@
 		1A2F6C17C9D81C32BB106D61 /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		1F8B14ADBA94080D3A655E53 /* Pods-ios-auth-flow-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-auth-flow-sample.debug.xcconfig"; path = "Target Support Files/Pods-ios-auth-flow-sample/Pods-ios-auth-flow-sample.debug.xcconfig"; sourceTree = "<group>"; };
 		30208152F4FE732FE3E117E3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5434E9452B6F8E20009D44E4 /* TappableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableSpec.swift; sourceTree = "<group>"; };
+		5434E9472B6FF202009D44E4 /* DecodingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingStrategy.swift; sourceTree = "<group>"; };
 		543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMock.swift; sourceTree = "<group>"; };
+		545968452B6E1426002591B4 /* ApiClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientSpec.swift; sourceTree = "<group>"; };
 		5461109B2AAAF4DF0049588A /* ios-auth-flow-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-auth-flow-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5461109E2AAAF4DF0049588A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		546110A02AAAF4DF0049588A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,12 +112,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5434E9432B6F8DD4009D44E4 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5490E4AC2AE45F9B007FFC6E /* Tappable.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		5434E9442B6F8E06009D44E4 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5434E9452B6F8E20009D44E4 /* TappableSpec.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		543522E62B08CA4E00A531F9 /* TestHelper */ = {
 			isa = PBXGroup;
 			children = (
 				543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */,
 			);
 			path = TestHelper;
+			sourceTree = "<group>";
+		};
+		545968442B6E13FA002591B4 /* ApiClient */ = {
+			isa = PBXGroup;
+			children = (
+				545968452B6E1426002591B4 /* ApiClientSpec.swift */,
+			);
+			path = ApiClient;
 			sourceTree = "<group>";
 		};
 		546110922AAAF4DF0049588A = {
@@ -137,6 +167,7 @@
 		5461109D2AAAF4DF0049588A /* ios-auth-flow-sample */ = {
 			isa = PBXGroup;
 			children = (
+				5434E9432B6F8DD4009D44E4 /* Library */,
 				546110B22AAB00020049588A /* Presentation */,
 				546C6E652B5CE62700AF4C22 /* Domain */,
 				546110B52AAB0E3F0049588A /* Data */,
@@ -192,6 +223,7 @@
 			children = (
 				546110BD2AAB14E80049588A /* ApiClient.swift */,
 				546110BF2AAB18610049588A /* AuthValidRequest.swift */,
+				5434E9472B6FF202009D44E4 /* DecodingStrategy.swift */,
 			);
 			path = ApiClient;
 			sourceTree = "<group>";
@@ -261,7 +293,6 @@
 			isa = PBXGroup;
 			children = (
 				5490E4AA2AE43799007FFC6E /* UIView+Ext.swift */,
-				5490E4AC2AE45F9B007FFC6E /* Tappable.swift */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -269,6 +300,7 @@
 		54B1DA542AFED08F00A5A2C3 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				5434E9442B6F8E06009D44E4 /* Library */,
 				543522E62B08CA4E00A531F9 /* TestHelper */,
 				54B1DA5C2AFED11900A5A2C3 /* Presentation */,
 				54B1DA5D2AFED12500A5A2C3 /* Data */,
@@ -287,6 +319,7 @@
 		54B1DA5D2AFED12500A5A2C3 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				545968442B6E13FA002591B4 /* ApiClient */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -534,6 +567,7 @@
 				546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */,
 				546C6E6A2B5CE92700AF4C22 /* RepositoryError.swift in Sources */,
 				546C6E732B5CED3300AF4C22 /* EmailAuthenticationCredential.swift in Sources */,
+				5434E9482B6FF202009D44E4 /* DecodingStrategy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,7 +576,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				54B1DA602AFED1A800A5A2C3 /* SignUpViewModelSpec.swift in Sources */,
+				5434E9462B6F8E20009D44E4 /* TappableSpec.swift in Sources */,
 				543522EC2B08D9FA00A531F9 /* GeneratedMock.swift in Sources */,
+				545968462B6E1426002591B4 /* ApiClientSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
