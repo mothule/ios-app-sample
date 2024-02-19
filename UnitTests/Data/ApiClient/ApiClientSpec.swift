@@ -12,5 +12,6 @@ import Combine
 @testable import ios_auth_flow_sample
 
 final class ApiClientSpec: AsyncSpec {
+    // TODO: DI Packageを用意して通信をMockingしたAdapterをDIしてUT実装する
 
 }
