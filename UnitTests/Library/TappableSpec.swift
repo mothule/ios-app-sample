@@ -33,9 +33,9 @@ final class TappableSpec: QuickSpec {
             describe("URLComponents") {
                 it("") {
                     var url = URL(string: "https://www.google.co.jp")!
-                    var c = URLComponents().tap(block: { c in
-                        c.queryItems = [.init(name: "test", value: "value")]
-                    })
+                    var c = URLComponents().tap {
+                        $0.queryItems = [.init(name: "test", value: "value")]
+                    }
                     expect(c.url(relativeTo: url)?.absoluteString) == "https://www.google.co.jp?test=value"
                 }
 

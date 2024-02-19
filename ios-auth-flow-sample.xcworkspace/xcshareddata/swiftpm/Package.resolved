@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "apisession",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mothule/ApiSession",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a06c1d6b42bd23f83eeccde0a7b77698f9d003a5"
+      }
+    }
+  ],
+  "version" : 2
+}

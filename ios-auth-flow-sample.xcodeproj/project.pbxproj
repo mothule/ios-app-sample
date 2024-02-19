@@ -10,7 +10,6 @@
 		07BC6C2FA470D95A606B27D1 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30208152F4FE732FE3E117E3 /* Pods_UnitTests.framework */; };
 		1B23936D7E045DC15673F9BB /* Pods_ios_auth_flow_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7668C0B8189788E793F16F2 /* Pods_ios_auth_flow_sample.framework */; };
 		5434E9462B6F8E20009D44E4 /* TappableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434E9452B6F8E20009D44E4 /* TappableSpec.swift */; };
-		5434E9482B6FF202009D44E4 /* DecodingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434E9472B6FF202009D44E4 /* DecodingStrategy.swift */; };
 		543522EC2B08D9FA00A531F9 /* GeneratedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */; };
 		545968462B6E1426002591B4 /* ApiClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545968452B6E1426002591B4 /* ApiClientSpec.swift */; };
 		5461109F2AAAF4DF0049588A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461109E2AAAF4DF0049588A /* AppDelegate.swift */; };
@@ -25,6 +24,8 @@
 		546110C02AAB18610049588A /* AuthValidRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110BF2AAB18610049588A /* AuthValidRequest.swift */; };
 		546110C32AAB2EE90049588A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110C22AAB2EE90049588A /* SignUpViewController.swift */; };
 		546110C52AAB2EFC0049588A /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110C42AAB2EFC0049588A /* SignUpViewModel.swift */; };
+		546170C82B80D9A3000310F6 /* ApiSession in Frameworks */ = {isa = PBXBuildFile; productRef = 546170C72B80D9A3000310F6 /* ApiSession */; };
+		546170CB2B80DA5B000310F6 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546170CA2B80DA5B000310F6 /* Request.swift */; };
 		546C6E642B5CE26B00AF4C22 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E632B5CE26B00AF4C22 /* DomainError.swift */; };
 		546C6E682B5CE66500AF4C22 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E672B5CE66500AF4C22 /* AuthRepository.swift */; };
 		546C6E6A2B5CE92700AF4C22 /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546C6E692B5CE92700AF4C22 /* RepositoryError.swift */; };
@@ -52,7 +53,6 @@
 		1F8B14ADBA94080D3A655E53 /* Pods-ios-auth-flow-sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-auth-flow-sample.debug.xcconfig"; path = "Target Support Files/Pods-ios-auth-flow-sample/Pods-ios-auth-flow-sample.debug.xcconfig"; sourceTree = "<group>"; };
 		30208152F4FE732FE3E117E3 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5434E9452B6F8E20009D44E4 /* TappableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableSpec.swift; sourceTree = "<group>"; };
-		5434E9472B6FF202009D44E4 /* DecodingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodingStrategy.swift; sourceTree = "<group>"; };
 		543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMock.swift; sourceTree = "<group>"; };
 		545968452B6E1426002591B4 /* ApiClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClientSpec.swift; sourceTree = "<group>"; };
 		5461109B2AAAF4DF0049588A /* ios-auth-flow-sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-auth-flow-sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,6 +69,7 @@
 		546110BF2AAB18610049588A /* AuthValidRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthValidRequest.swift; sourceTree = "<group>"; };
 		546110C22AAB2EE90049588A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		546110C42AAB2EFC0049588A /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		546170CA2B80DA5B000310F6 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		546C6E632B5CE26B00AF4C22 /* DomainError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
 		546C6E672B5CE66500AF4C22 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
 		546C6E692B5CE92700AF4C22 /* RepositoryError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryError.swift; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546170C82B80D9A3000310F6 /* ApiSession in Frameworks */,
 				1B23936D7E045DC15673F9BB /* Pods_ios_auth_flow_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,9 +223,8 @@
 		546110BC2AAB14D90049588A /* ApiClient */ = {
 			isa = PBXGroup;
 			children = (
+				546170C92B80DA40000310F6 /* Request */,
 				546110BD2AAB14E80049588A /* ApiClient.swift */,
-				546110BF2AAB18610049588A /* AuthValidRequest.swift */,
-				5434E9472B6FF202009D44E4 /* DecodingStrategy.swift */,
 			);
 			path = ApiClient;
 			sourceTree = "<group>";
@@ -235,6 +236,15 @@
 				546110C42AAB2EFC0049588A /* SignUpViewModel.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		546170C92B80DA40000310F6 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				546110BF2AAB18610049588A /* AuthValidRequest.swift */,
+				546170CA2B80DA5B000310F6 /* Request.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		546C6E622B5CE25100AF4C22 /* Error */ = {
@@ -362,6 +372,9 @@
 			dependencies = (
 			);
 			name = "ios-auth-flow-sample";
+			packageProductDependencies = (
+				546170C72B80D9A3000310F6 /* ApiSession */,
+			);
 			productName = "ios-auth-flow-sample";
 			productReference = 5461109B2AAAF4DF0049588A /* ios-auth-flow-sample.app */;
 			productType = "com.apple.product-type.application";
@@ -414,6 +427,9 @@
 				Base,
 			);
 			mainGroup = 546110922AAAF4DF0049588A;
+			packageReferences = (
+				546170C62B80D9A3000310F6 /* XCRemoteSwiftPackageReference "ApiSession" */,
+			);
 			productRefGroup = 5461109C2AAAF4DF0049588A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -566,8 +582,8 @@
 				546110B82AAB0E840049588A /* AuthRepositoryImpl.swift in Sources */,
 				546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */,
 				546C6E6A2B5CE92700AF4C22 /* RepositoryError.swift in Sources */,
+				546170CB2B80DA5B000310F6 /* Request.swift in Sources */,
 				546C6E732B5CED3300AF4C22 /* EmailAuthenticationCredential.swift in Sources */,
-				5434E9482B6FF202009D44E4 /* DecodingStrategy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,6 +869,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		546170C62B80D9A3000310F6 /* XCRemoteSwiftPackageReference "ApiSession" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mothule/ApiSession";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		546170C72B80D9A3000310F6 /* ApiSession */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 546170C62B80D9A3000310F6 /* XCRemoteSwiftPackageReference "ApiSession" */;
+			productName = ApiSession;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 546110932AAAF4DF0049588A /* Project object */;
 }
