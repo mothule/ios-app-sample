@@ -84,8 +84,8 @@ class SignUpViewModel {
     private var cancellables: Set<AnyCancellable> = []
     private let userAuthenticationUsecase: UserAuthenticationUsecase
     
-    init(authRepository: AuthRepository = AuthRepositoryImpl()) {
-        self.userAuthenticationUsecase = .init(authRepository: authRepository)
+    init(userAuthenticationUsecase: UserAuthenticationUsecase) {
+        self.userAuthenticationUsecase = userAuthenticationUsecase
         setBindings()
     }
     

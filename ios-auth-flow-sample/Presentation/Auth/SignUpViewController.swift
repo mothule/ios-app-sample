@@ -8,9 +8,10 @@
 import UIKit
 import Combine
 import CombineCocoa
+import DIContainer
 
 class SignUpViewController: UIViewController {
-    private let viewModel: SignUpViewModel = .init()
+    private let viewModel: SignUpViewModel = .init(userAuthenticationUsecase: resolveDI())
     private var cancellables: Set<AnyCancellable> = []
     private lazy var signUpButton: UIButton = .init().tap {
         $0.setTitle("SIGN UP", for: .normal)

@@ -8,6 +8,15 @@
         "branch" : "main",
         "revision" : "a06c1d6b42bd23f83eeccde0a7b77698f9d003a5"
       }
+    },
+    {
+      "identity" : "dicontainer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mothule/DIContainer",
+      "state" : {
+        "branch" : "main",
+        "revision" : "71d195e31572730fdc224db7197ebd0f9f6d895f"
+      }
     }
   ],
   "version" : 2
