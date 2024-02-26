@@ -11,6 +11,7 @@
 		1B23936D7E045DC15673F9BB /* Pods_ios_auth_flow_sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7668C0B8189788E793F16F2 /* Pods_ios_auth_flow_sample.framework */; };
 		5434E9462B6F8E20009D44E4 /* TappableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434E9452B6F8E20009D44E4 /* TappableSpec.swift */; };
 		543522EC2B08D9FA00A531F9 /* GeneratedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */; };
+		5450966F2B8CC0030046ABCF /* DIContainer in Frameworks */ = {isa = PBXBuildFile; productRef = 5450966E2B8CC0030046ABCF /* DIContainer */; };
 		545968462B6E1426002591B4 /* ApiClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545968452B6E1426002591B4 /* ApiClientSpec.swift */; };
 		5461109F2AAAF4DF0049588A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5461109E2AAAF4DF0049588A /* AppDelegate.swift */; };
 		546110A12AAAF4DF0049588A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546110A02AAAF4DF0049588A /* SceneDelegate.swift */; };
@@ -90,6 +91,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				546170C82B80D9A3000310F6 /* ApiSession in Frameworks */,
+				5450966F2B8CC0030046ABCF /* DIContainer in Frameworks */,
 				1B23936D7E045DC15673F9BB /* Pods_ios_auth_flow_sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +376,7 @@
 			name = "ios-auth-flow-sample";
 			packageProductDependencies = (
 				546170C72B80D9A3000310F6 /* ApiSession */,
+				5450966E2B8CC0030046ABCF /* DIContainer */,
 			);
 			productName = "ios-auth-flow-sample";
 			productReference = 5461109B2AAAF4DF0049588A /* ios-auth-flow-sample.app */;
@@ -429,6 +432,7 @@
 			mainGroup = 546110922AAAF4DF0049588A;
 			packageReferences = (
 				546170C62B80D9A3000310F6 /* XCRemoteSwiftPackageReference "ApiSession" */,
+				5450966D2B8CC0030046ABCF /* XCRemoteSwiftPackageReference "DIContainer" */,
 			);
 			productRefGroup = 5461109C2AAAF4DF0049588A /* Products */;
 			projectDirPath = "";
@@ -871,6 +875,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5450966D2B8CC0030046ABCF /* XCRemoteSwiftPackageReference "DIContainer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mothule/DIContainer";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		546170C62B80D9A3000310F6 /* XCRemoteSwiftPackageReference "ApiSession" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/mothule/ApiSession";
@@ -882,6 +894,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5450966E2B8CC0030046ABCF /* DIContainer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5450966D2B8CC0030046ABCF /* XCRemoteSwiftPackageReference "DIContainer" */;
+			productName = DIContainer;
+		};
 		546170C72B80D9A3000310F6 /* ApiSession */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 546170C62B80D9A3000310F6 /* XCRemoteSwiftPackageReference "ApiSession" */;
