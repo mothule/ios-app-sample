@@ -9,7 +9,7 @@
 import Quick
 import Nimble
 import Combine
-@testable import ios_auth_flow_sample
+@testable import ios_app_sample
 
 final class ApiClientSpec: AsyncSpec {
     // TODO: DI Packageを用意して通信をMockingしたAdapterをDIしてUT実装する

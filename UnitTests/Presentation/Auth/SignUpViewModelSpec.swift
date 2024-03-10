@@ -8,7 +8,8 @@
 import Quick
 import Nimble
 import Combine
-@testable import ios_auth_flow_sample
+import DIContainer
+@testable import ios_app_sample
 
 extension SignUpViewModel.AuthenticationState: Equatable {
     public static func == (lhs: SignUpViewModel.AuthenticationState, rhs: SignUpViewModel.AuthenticationState) -> Bool {
@@ -39,7 +40,7 @@ final class SignUpViewModelSpec: QuickSpec {
             
             beforeEach {
                 mockAuthRepository = AuthRepositoryMock()
-                target = .init(authRepository: mockAuthRepository)
+                target = .init(userAuthenticationUsecase: .init(authRepository: mockAuthRepository))
             }
             
             describe("メールアドレス入力バリデーション") {

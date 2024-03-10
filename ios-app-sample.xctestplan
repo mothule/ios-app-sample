@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "C21F9395-6CFF-4435-929C-8F640316F6E6",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:ios-app-sample.xcodeproj",
+        "identifier" : "54B1DA522AFED08F00A5A2C3",
+        "name" : "UnitTests"
+      }
+    }
+  ],
+  "version" : 1
+}
