@@ -11,7 +11,7 @@ import CombineCocoa
 import DIContainer
 
 class SignUpViewController: UIViewController {
-    private let viewModel: SignUpViewModel = .init(userAuthenticationUsecase: resolveDI())
+    private let viewModel: SignUpViewModel
     private var cancellables: Set<AnyCancellable> = []
     private lazy var signUpButton: UIButton = .init().tap {
         $0.setTitle("SIGN UP", for: .normal)
@@ -66,7 +66,16 @@ class SignUpViewController: UIViewController {
         $0.centerXAnchor.constraint(equalTo: activityIndicator.centerXAnchor).isActive = true
         $0.centerYAnchor.constraint(equalTo: activityIndicator.centerYAnchor).isActive = true
     }
-
+    
+    init(viewModel: SignUpViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func loadView() {
         self.view = UIView(frame: UIScreen.main.bounds)
         
@@ -267,11 +276,20 @@ class SignUpViewController: UIViewController {
     }
 }
 
+extension SignUpViewController: DIContainerInjectable {
+    static func diContainer() -> DIContainer.Container {
+        Container.shared.merging(
+            .init().register(SignUpViewController.self) { c in SignUpViewController(viewModel: c.resolve()) }
+                .register(SignUpViewModel.self) { c in SignUpViewModel(userAuthenticationUsecase: c.resolve()) }
+        )
+    }
+}
+
 import SwiftUI
 struct SignUpViewController_Preview: PreviewProvider {
     struct Wrapper: UIViewControllerRepresentable {
         func makeUIViewController(context: Context) -> some UIViewController {
-            SignUpViewController()
+            SignUpViewController.diContainer().resolve(SignUpViewController.self)
         }
         func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
         }

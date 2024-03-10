@@ -79,7 +79,7 @@ class RootViewController: UIViewController {
     }
     
     private func showSignUp() {
-        let vc = SignUpViewController()
+        let vc: SignUpViewController = .diContainer().resolve()
         addChild(vc)
         view.addSubview(vc.view)
         vc.didMove(toParent: self)

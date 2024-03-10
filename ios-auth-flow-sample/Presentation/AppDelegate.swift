@@ -8,10 +8,6 @@
 import UIKit
 import DIContainer
 
-func resolveDI<T>() -> T {
-    DIContainer.shared.resolve()
-}
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -24,12 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // TODO: アクセスフローを違反しないためにレイヤー別にイベントを呼び出す仕組み実装する
     private func initializeDIContainer() {
-        DIContainer.shared.register(AuthRepository.self) { _ in
-            AuthRepositoryImpl()
-        }
-        DIContainer.shared.register(UserAuthenticationUsecase.self) { c in
-            UserAuthenticationUsecase(authRepository: c.resolve())
-        }
+        Container.shared
+            .register(AuthRepository.self) { _ in
+                AuthRepositoryImpl()
+            }
+            .register(UserAuthenticationUsecase.self) { c in
+                UserAuthenticationUsecase(authRepository: c.resolve())
+            }
     }
 
     // MARK: UISceneSession Lifecycle
