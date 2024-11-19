@@ -183,7 +183,7 @@ class SignUpViewController: UIViewController {
     
     private func setBindings() {
         viewModel.output.$dialogError
-            .compactMap { $0 }
+            .ignoreNil()
             .sink { [unowned self] error in
                 let alert = UIAlertController(
                     title: "ERROR",
@@ -231,7 +231,7 @@ class SignUpViewController: UIViewController {
             .assign(to: \.text, on: passwordValidationResultLabel)
             .store(in: &cancellables)
         viewModel.output.$dialogError
-            .compactMap { $0 }
+            .ignoreNil()
             .sink { [unowned self] signUpViewError in
                 let alert = UIAlertController(
                     title: "ERROR",

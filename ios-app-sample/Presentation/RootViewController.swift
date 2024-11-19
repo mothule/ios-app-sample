@@ -51,7 +51,7 @@ class RootViewController: UIViewController {
     
     private func setupBindings() {
         viewModel.$procState
-            .compactMap{$0} // ignore nil
+            .ignoreNil()
             .receive(on: RunLoop.main)
             .sink { [unowned self] viewState in
                 switch viewState {

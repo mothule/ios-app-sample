@@ -92,7 +92,7 @@ class SignUpViewModel {
     private func setBindings() {
         // Email → Email Validation Error
         input.$email
-            .compactMap { $0 } // ignore nil
+            .ignoreNil()
             .map { email in
                 email.isEmpty ? .emailRequired() : .success()
             }
@@ -100,7 +100,7 @@ class SignUpViewModel {
         
         // Password → Password Validation Error
         input.$password
-            .compactMap { $0 } // ignore nil
+            .ignoreNil()
             .map { password in
                 if password.isEmpty {
                     return .passwordRequired()
@@ -143,7 +143,7 @@ class SignUpViewModel {
         
         // SignUp State → isShownProgress
         $authState
-            .compactMap { $0 }
+            .ignoreNil()
             .map { state in
                 if case .requesting = state { return true }
                 else { return false }
@@ -153,7 +153,7 @@ class SignUpViewModel {
         // SignUp State is successful → Rouote
         //              is error → Dialog Error
         $authState
-            .compactMap { $0 }
+            .ignoreNil()
             .receive(on: RunLoop.main)
             .sink { [unowned self] state in
                 switch state {
