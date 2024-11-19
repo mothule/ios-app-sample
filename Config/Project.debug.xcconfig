@@ -1,0 +1,19 @@
+//
+//  Config.debug.xcconfig
+//  ios-app-sample
+//  
+//  Created by mothule on 2024/11/20
+//  
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Project.shared.xcconfig"
+
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon_debug
+
+
+PRODUCT_BUNDLE_IDENTIFIER = com.mothule.ios-app-sample-debug
+
+INFOPLIST_KEY_CFBundleDisplayName = [DEBUG]$(TARGET_NAME)
