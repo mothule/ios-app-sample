@@ -14,7 +14,7 @@ final class AuthRepositoryMock: AuthRepository {
 
     private(set) var validTokenCallCount = 0
     var validTokenHandler: (() async throws -> ())?
-    func validToken() async throws  {
+    func validToken() async throws {
         validTokenCallCount += 1
         if let validTokenHandler = validTokenHandler {
             try await validTokenHandler()
@@ -23,7 +23,7 @@ final class AuthRepositoryMock: AuthRepository {
     }
 
     private(set) var authenticateWithEmailCallCount = 0
-    var authenticateWithEmailHandler: ((EmailAuthenticationCredential) async throws -> (UserAccount))?
+    var authenticateWithEmailHandler: ((EmailAuthenticationCredential) async throws -> UserAccount)?
     func authenticateWithEmail(credential: EmailAuthenticationCredential) async throws -> UserAccount {
         authenticateWithEmailCallCount += 1
         if let authenticateWithEmailHandler = authenticateWithEmailHandler {
@@ -32,5 +32,7 @@ final class AuthRepositoryMock: AuthRepository {
         fatalError("authenticateWithEmailHandler returns can't have a default value thus its handler must be set")
     }
 }
+
+
 
 #endif

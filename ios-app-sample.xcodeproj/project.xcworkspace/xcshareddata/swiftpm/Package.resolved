@@ -1,0 +1,69 @@
+{
+  "originHash" : "54b8c83be80b5d8827fc31cfa1d216574b3f56453920a20bad503e8c192c27ec",
+  "pins" : [
+    {
+      "identity" : "apisession",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mothule/ApiSession",
+      "state" : {
+        "branch" : "main",
+        "revision" : "a06c1d6b42bd23f83eeccde0a7b77698f9d003a5"
+      }
+    },
+    {
+      "identity" : "combinecocoa",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CombineCommunity/CombineCocoa",
+      "state" : {
+        "revision" : "7300c75ff9e072aa7fd0fccefcc88f74aae9bf56",
+        "version" : "0.4.1"
+      }
+    },
+    {
+      "identity" : "defaults",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sindresorhus/Defaults",
+      "state" : {
+        "revision" : "cc938ecf0bed848dc80a9726ac5455104e3f9dae",
+        "version" : "9.0.2"
+      }
+    },
+    {
+      "identity" : "dicontainer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mothule/DIContainer",
+      "state" : {
+        "branch" : "main",
+        "revision" : "08af502899dd8a6af230471eefc1a172abf56d33"
+      }
+    },
+    {
+      "identity" : "nimble",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Quick/Nimble.git",
+      "state" : {
+        "revision" : "e9d769113660769a4d9dd3afb855562c0b7ae7b0",
+        "version" : "7.3.4"
+      }
+    },
+    {
+      "identity" : "quick",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Quick/Quick",
+      "state" : {
+        "revision" : "f2b5a06440ea87eba1a167cab37bf6496646c52e",
+        "version" : "1.3.4"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-syntax",
+      "state" : {
+        "revision" : "0687f71944021d616d34d922343dcef086855920",
+        "version" : "600.0.1"
+      }
+    }
+  ],
+  "version" : 3
+}
