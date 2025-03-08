@@ -35,18 +35,8 @@ class RootViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        self.view.addConstraints({() -> [NSLayoutConstraint] in
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "|-[indicator]-|",
-                metrics: nil,
-                views: ["indicator": indicatorView]
-            ) +
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-[indicator]-|",
-                metrics: nil,
-                views: ["indicator": indicatorView]
-            )
-        }())
+        indicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        indicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     private func setupBindings() {
@@ -88,4 +78,9 @@ class RootViewController: UIViewController {
     private func showMain() {
         print(#function)
     }
+}
+
+#Preview {
+    let vc = RootViewController()
+    return vc
 }
