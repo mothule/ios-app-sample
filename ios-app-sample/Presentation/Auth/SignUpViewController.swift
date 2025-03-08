@@ -15,7 +15,6 @@ class SignUpViewController: UIViewController {
     private var cancellables: Set<AnyCancellable> = []
     private lazy var signUpButton: UIButton = .init().tap {
         $0.setTitle("SIGN UP", for: .normal)
-        $0.backgroundColor = .magenta
         $0.setTitleColor(.white, for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -113,65 +112,40 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(container)
         self.view.addSubview(modalIndicatorView)
         
-        self.view.addConstraints({() -> [NSLayoutConstraint] in
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "|-16-[container]-16-|",
-                metrics: nil,
-                views: ["container": container]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "|[emailTextField]|",
-                metrics: nil,
-                views: ["emailTextField": emailTextField]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "|[emailValidationResultLabel]|",
-                metrics: nil,
-                views: ["emailValidationResultLabel": emailValidationResultLabel]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "V:[emailValidationResultLabel(12)]",
-                metrics: nil,
-                views: ["emailValidationResultLabel": emailValidationResultLabel]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "|[textField]|",
-                metrics: nil,
-                views: ["textField": passwordTextField]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "|[passwordValidationResultLabel]|",
-                metrics: nil,
-                views: ["passwordValidationResultLabel": passwordValidationResultLabel]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "V:[passwordValidationResultLabel(12)]",
-                metrics: nil,
-                views: ["passwordValidationResultLabel": passwordValidationResultLabel]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "V:[button(44)]",
-                metrics: nil,
-                views: ["button": signUpButton]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "|[button]|",
-                metrics: nil,
-                views: ["button": signUpButton]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "|[indicator]|",
-                metrics: nil,
-                views: ["indicator": modalIndicatorView]
-            )
-            + NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|[indicator]|",
-                metrics: nil,
-                views: ["indicator": modalIndicatorView]
-            )
-        }())
-        container.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
+        // Container layout
         container.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        
+        // Email TextField layout
+        emailTextField.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        emailTextField.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        
+        // Email Validation Result TextField layout
+        emailValidationResultLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        emailValidationResultLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        emailValidationResultLabel.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        emailValidationResultLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
+
+        // Password TextField layout
+        passwordTextField.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        passwordTextField.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        
+        // Password Validation Result TextField layout
+        passwordValidationResultLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        passwordValidationResultLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        passwordValidationResultLabel.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        passwordValidationResultLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
+
+        // Sign up Button laout
+        signUpButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        signUpButton.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        signUpButton.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        
+        // Modal Indicator layout
+        modalIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        modalIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     override func viewDidLoad() {
@@ -285,17 +259,8 @@ extension SignUpViewController: DIContainerInjectable {
     }
 }
 
-import SwiftUI
-struct SignUpViewController_Preview: PreviewProvider {
-    struct Wrapper: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> some UIViewController {
-            SignUpViewController.diContainer().resolve(SignUpViewController.self)
-        }
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        }
-    }
+#Preview {
+    let vc = SignUpViewController.diContainer().resolve(SignUpViewController.self)
+    return vc
     
-    static var previews: some View {
-        Wrapper()
-    }
 }
