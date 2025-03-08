@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		541ED0B82D7C46F100122A98 /* TextForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 541ED0B72D7C46D900122A98 /* TextForm.swift */; };
 		5434E9462B6F8E20009D44E4 /* TappableSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5434E9452B6F8E20009D44E4 /* TappableSpec.swift */; };
 		543522EC2B08D9FA00A531F9 /* GeneratedMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */; };
 		5450966F2B8CC0030046ABCF /* DIContainer in Frameworks */ = {isa = PBXBuildFile; productRef = 5450966E2B8CC0030046ABCF /* DIContainer */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		541ED0B72D7C46D900122A98 /* TextForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextForm.swift; sourceTree = "<group>"; };
 		542D014D2B9DDA2800C3B215 /* ios-app-sample.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "ios-app-sample.xctestplan"; sourceTree = "<group>"; };
 		5434E9452B6F8E20009D44E4 /* TappableSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappableSpec.swift; sourceTree = "<group>"; };
 		543522EB2B08D9FA00A531F9 /* GeneratedMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneratedMock.swift; sourceTree = "<group>"; };
@@ -107,6 +109,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		541ED0B62D7C46CC00122A98 /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				541ED0B72D7C46D900122A98 /* TextForm.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		5434E9432B6F8DD4009D44E4 /* Library */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +186,7 @@
 		546110B22AAB00020049588A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				541ED0B62D7C46CC00122A98 /* Component */,
 				5490E4A92AE4372F007FFC6E /* Library */,
 				546110C12AAB2EC40049588A /* Auth */,
 				5461109E2AAAF4DF0049588A /* AppDelegate.swift */,
@@ -483,6 +494,7 @@
 			files = (
 				546110BE2AAB14E80049588A /* ApiClient.swift in Sources */,
 				5490E4AB2AE43799007FFC6E /* UIView+Ext.swift in Sources */,
+				541ED0B82D7C46F100122A98 /* TextForm.swift in Sources */,
 				5490E4AD2AE45F9B007FFC6E /* Tappable.swift in Sources */,
 				546110A32AAAF4DF0049588A /* RootViewController.swift in Sources */,
 				546C6E642B5CE26B00AF4C22 /* DomainError.swift in Sources */,

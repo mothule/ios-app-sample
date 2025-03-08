@@ -19,33 +19,20 @@ class SignUpViewController: UIViewController {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private lazy var emailValidationResultLabel: UILabel = .init().tap {
-        $0.textAlignment = .right
-        $0.textColor = .red
-        $0.font = .systemFont(ofSize: 12.0)
+    private lazy var emailForm: TextForm = .init().tap {
+        $0.titleLabel.text = "Email"
         $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.textField.placeholder = "xxx@xxx.xxx"
+        $0.textField.textContentType = .emailAddress
+        $0.textField.autocorrectionType = .no
+        $0.textField.autocapitalizationType = .none
     }
-    private lazy var passwordValidationResultLabel: UILabel = .init().tap {
-        $0.textAlignment = .right
-        $0.textColor = .red
-        $0.font = .systemFont(ofSize: 12.0)
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    private lazy var emailTextField: UITextField = .init().tap {
-        $0.placeholder = "xxx@xxx.xxx"
-        $0.textContentType = .emailAddress
-        $0.autocorrectionType = .no
-        $0.autocapitalizationType = .none
-        $0.borderStyle = .roundedRect
-        $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    private lazy var passwordTextField: UITextField = .init().tap {
-        $0.borderStyle = .roundedRect
-        $0.placeholder = "8 ~ "
-        $0.textContentType = .newPassword
-        $0.passwordRules = .init(descriptor: "minlength: 8; required: lower; required: upper; required: digit; required: [-];")
-        $0.isSecureTextEntry = true
-        $0.translatesAutoresizingMaskIntoConstraints = false
+    private lazy var passwordForm: TextForm = .init().tap {
+        $0.titleLabel.text = "Password"
+        $0.textField.placeholder = "8 ~ "
+        $0.textField.textContentType = .newPassword
+        $0.textField.passwordRules = .init(descriptor: "minlength: 8; required: lower; required: upper; required: digit; required: [-];")
+        $0.textField.isSecureTextEntry = true
     }
     
     // TODO: Modal Indicator View Componentとして抽出を検討する
@@ -91,58 +78,36 @@ class SignUpViewController: UIViewController {
                 $0.translatesAutoresizingMaskIntoConstraints = false
             })
             $0.addArrangedSubview(.verticalSpacer(32))
-            $0.addArrangedSubview(UILabel().tap {
-                $0.text = "Email"
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            })
-            $0.addArrangedSubview(.verticalSpacer(4))
-            $0.addArrangedSubview(emailTextField)
-            $0.addArrangedSubview(emailValidationResultLabel)
+            $0.addArrangedSubview(emailForm)
             $0.addArrangedSubview(.verticalSpacer(8))
-            $0.addArrangedSubview(UILabel().tap {
-                $0.text = "Password"
-                $0.translatesAutoresizingMaskIntoConstraints = false
-            })
-            $0.addArrangedSubview(.verticalSpacer(4))
-            $0.addArrangedSubview(passwordTextField)
-            $0.addArrangedSubview(passwordValidationResultLabel)
+            $0.addArrangedSubview(passwordForm)
             $0.addArrangedSubview(.verticalSpacer(16))
             $0.addArrangedSubview(signUpButton)
         }
         self.view.addSubview(container)
         self.view.addSubview(modalIndicatorView)
-        
-        
+
         // Container layout
         container.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         
-        // Email TextField layout
-        emailTextField.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        emailTextField.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        
-        // Email Validation Result TextField layout
-        emailValidationResultLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        emailValidationResultLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        emailValidationResultLabel.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        emailValidationResultLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        // Email form layout
+        // Y軸は親ViewがUIStack.verticalなので設定不要
+        emailForm.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        emailForm.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
 
-        // Password TextField layout
-        passwordTextField.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        passwordTextField.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        
-        // Password Validation Result TextField layout
-        passwordValidationResultLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        passwordValidationResultLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        passwordValidationResultLabel.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        passwordValidationResultLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
+        // Password form layout
+        // Y軸は親ViewがUIStack.verticalなので設定不要
+        passwordForm.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
+        passwordForm.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
 
         // Sign up Button laout
+        // Y軸は親ViewがUIStack.verticalなので設定不要
         signUpButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         signUpButton.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
         signUpButton.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
-        
+
         // Modal Indicator layout
         modalIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         modalIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -197,12 +162,12 @@ class SignUpViewController: UIViewController {
         
         viewModel.output.$emailValidationError
             .map { $0?.errorDescription }
-            .assign(to: \.text, on: emailValidationResultLabel)
+            .assign(to: \.text, on: emailForm.validationResultLabel)
             .store(in: &cancellables)
         
         viewModel.output.$passwordValidationError
             .map { $0?.errorDescription }
-            .assign(to: \.text, on: passwordValidationResultLabel)
+            .assign(to: \.text, on: passwordForm.validationResultLabel)
             .store(in: &cancellables)
         viewModel.output.$dialogError
             .ignoreNil()
@@ -225,14 +190,14 @@ class SignUpViewController: UIViewController {
         .store(in: &cancellables)
         
         NotificationCenter.default
-            .publisher(for: UITextField.textDidChangeNotification, object: emailTextField)
+            .publisher(for: UITextField.textDidChangeNotification, object: emailForm.textField)
             .compactMap({ $0.object as? UITextField })
             .map({ $0.text })
             .replaceNil(with: "")
             .assign(to: &viewModel.input.$email)
         
         NotificationCenter.default
-            .publisher(for: UITextField.textDidChangeNotification, object: passwordTextField)
+            .publisher(for: UITextField.textDidChangeNotification, object: passwordForm.textField)
             .compactMap({ $0.object as? UITextField })
             .map({ $0.text })
             .replaceNil(with: "")
