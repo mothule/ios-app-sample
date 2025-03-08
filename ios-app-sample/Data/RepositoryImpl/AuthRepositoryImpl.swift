@@ -11,7 +11,7 @@ import Defaults
 struct AuthRepositoryImpl: AuthRepository {
     func authenticateWithEmail(credential: EmailAuthenticationCredential) async throws -> UserAccount {
         return try await withCheckedThrowingContinuation { continuation in
-            Thread.sleep(forTimeInterval: 1)
+            Thread.sleep(forTimeInterval: 3)
 //            continuation.resume(throwing: RepositoryError.emptyApiAccessToken)
             continuation.resume(returning: .init(accessToken: "asdfasdfasdf"))
         }
@@ -19,7 +19,7 @@ struct AuthRepositoryImpl: AuthRepository {
     
     func validToken() async throws {
         return try await withCheckedThrowingContinuation { continuation in
-            Thread.sleep(forTimeInterval: 1)
+            Thread.sleep(forTimeInterval: 2)
             
             let token = Defaults[.apiAccessToken]
             guard token.isEmpty == false else {
