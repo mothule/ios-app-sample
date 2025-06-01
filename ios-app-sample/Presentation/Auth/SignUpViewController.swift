@@ -49,8 +49,10 @@ class SignUpViewController: UIViewController {
         }
         $0.addSubview(activityIndicator)
         
-        $0.centerXAnchor.constraint(equalTo: activityIndicator.centerXAnchor).isActive = true
-        $0.centerYAnchor.constraint(equalTo: activityIndicator.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            $0.centerXAnchor.constraint(equalTo: activityIndicator.centerXAnchor),
+            $0.centerYAnchor.constraint(equalTo: activityIndicator.centerYAnchor),
+        ])
     }
     
     init(viewModel: SignUpViewModel) {
@@ -88,30 +90,32 @@ class SignUpViewController: UIViewController {
         self.view.addSubview(container)
         self.view.addSubview(modalIndicatorView)
 
-        // Container layout
-        container.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        
-        // Email form layout
-        // Y軸は親ViewがUIStack.verticalなので設定不要
-        emailForm.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        emailForm.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            // Container layout
+            container.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            // Email form layout
+            // Y軸は親ViewがUIStack.verticalなので設定不要
+            emailForm.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            emailForm.trailingAnchor.constraint(equalTo: container.trailingAnchor),
 
-        // Password form layout
-        // Y軸は親ViewがUIStack.verticalなので設定不要
-        passwordForm.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        passwordForm.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+            // Password form layout
+            // Y軸は親ViewがUIStack.verticalなので設定不要
+            passwordForm.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            passwordForm.trailingAnchor.constraint(equalTo: container.trailingAnchor),
 
-        // Sign up Button laout
-        // Y軸は親ViewがUIStack.verticalなので設定不要
-        signUpButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        signUpButton.leadingAnchor.constraint(equalTo: container.leadingAnchor).isActive = true
-        signUpButton.trailingAnchor.constraint(equalTo: container.trailingAnchor).isActive = true
+            // Sign up Button laout
+            // Y軸は親ViewがUIStack.verticalなので設定不要
+            signUpButton.heightAnchor.constraint(equalToConstant: 44),
+            signUpButton.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            signUpButton.trailingAnchor.constraint(equalTo: container.trailingAnchor),
 
-        // Modal Indicator layout
-        modalIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        modalIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+            // Modal Indicator layout
+            modalIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            modalIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        ])
     }
     
     override func viewDidLoad() {
@@ -119,7 +123,6 @@ class SignUpViewController: UIViewController {
         print(String(describing: Self.self), #function)
         setBindings()
     }
-    
     
     private func setBindings() {
         viewModel.output.$dialogError
