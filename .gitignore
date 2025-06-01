@@ -91,3 +91,6 @@ iOSInjectionProject/
 .bundle/
 Pods/
 vendor/
+
+# .env
+.env
