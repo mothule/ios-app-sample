@@ -63,13 +63,14 @@ class SignUpViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = UIView(frame: UIScreen.main.bounds)
+        self.view = UIView(frame: UIScreen.main.bounds).tap {
+            $0.backgroundColor = .systemBackground
+        }
         
         let container: UIStackView = UIStackView().tap {
             $0.axis = .vertical
             $0.alignment = .leading
             $0.distribution = .fill
-            $0.backgroundColor = .white
             $0.layer.cornerRadius = 8.0
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.addArrangedSubview(UILabel().tap {

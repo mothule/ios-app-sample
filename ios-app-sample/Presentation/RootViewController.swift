@@ -19,9 +19,10 @@ class RootViewController: UIViewController {
     }()
     
     override func loadView() {
-        self.view = UIView(frame: UIScreen.main.bounds)
-        self.view.backgroundColor = .white
-        self.view.addSubview(indicatorView)
+        self.view = UIView(frame: UIScreen.main.bounds).tap {
+            $0.backgroundColor = .systemBackground
+            $0.addSubview(indicatorView)
+        }
     }
     
     override func viewDidLoad() {
